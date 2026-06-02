@@ -1,0 +1,174 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Inter:wght@300;400;500;600;700;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-deep-blue:   #053E83;
+  --color-deep-black:  #000000;
+  --color-ink:         #0A0A0A;
+  --color-graphite:    #1A1F2E;
+  --color-steel:       #6B7280;
+  --color-mist:        #D4D7DD;
+  --color-paper:       #F5F2EC;
+  --color-pure-white:  #FFFFFF;
+  --color-accent-blue: #1E5BB8;
+}
+
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    color: var(--color-pure-white);
+    background-color: var(--color-deep-black);
+    margin: 0;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Fraunces', serif;
+    font-feature-settings: 'ss01';
+  }
+
+  *:focus-visible {
+    outline: 2px solid var(--color-accent-blue);
+    outline-offset: 2px;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  ::selection {
+    background-color: var(--color-deep-blue);
+    color: white;
+  }
+}
+
+@layer components {
+  .container-main {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding-left: clamp(1.25rem, 5vw, 3rem);
+    padding-right: clamp(1.25rem, 5vw, 3rem);
+  }
+
+  .section-padding {
+    padding-top: clamp(5rem, 10vw, 9rem);
+    padding-bottom: clamp(5rem, 10vw, 9rem);
+  }
+
+  .text-hero {
+    font-size: clamp(2.75rem, 6vw, 5.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-feature-settings: 'ss01';
+  }
+
+  .text-section {
+    font-size: clamp(2rem, 4vw, 3.25rem);
+    line-height: 1.1;
+    letter-spacing: -0.015em;
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-feature-settings: 'ss01';
+  }
+
+  .text-eyebrow {
+    font-size: 0.75rem;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-deep-blue);
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-deep-blue);
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 0.9375rem;
+    padding: 14px 24px;
+    border-radius: 2px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background-color 200ms ease;
+    white-space: nowrap;
+  }
+
+  .btn-primary:hover {
+    background-color: var(--color-accent-blue);
+  }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    color: var(--color-deep-black);
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 0.9375rem;
+    padding: 14px 24px;
+    border-radius: 2px;
+    text-decoration: none;
+    border: 1px solid var(--color-mist);
+    cursor: pointer;
+    transition: border-color 200ms ease, color 200ms ease;
+    white-space: nowrap;
+  }
+
+  .btn-ghost:hover {
+    border-color: var(--color-deep-blue);
+    color: var(--color-deep-blue);
+  }
+
+  .btn-ghost-white {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 0.9375rem;
+    padding: 14px 24px;
+    border-radius: 2px;
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.3);
+    cursor: pointer;
+    transition: border-color 200ms ease, background-color 200ms ease;
+    white-space: nowrap;
+  }
+
+  .btn-ghost-white:hover {
+    border-color: rgba(255,255,255,0.7);
+    background-color: rgba(255,255,255,0.06);
+  }
+
+  .accent-line {
+    width: 60px;
+    height: 1px;
+    background-color: var(--color-deep-blue);
+    display: block;
+  }
+}

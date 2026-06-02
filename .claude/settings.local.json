@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm create *)",
+      "Bash(npm run *)",
+      "Bash(mkdir -p /tmp/f1000-verify)",
+      "Bash(npx playwright *)",
+      "Bash(node -e ' *)",
+      "PowerShell(New-Item -ItemType Directory -Force -Path \"c:\\\\Users\\\\Enzo\\\\Documents\\\\f1000 transportadora\\\\public\\\\imagens-hero\")",
+      "PowerShell(Get-ChildItem \"c:\\\\Users\\\\Enzo\\\\Documents\\\\f1000 transportadora\\\\public\\\\imagens-hero\\\\\" | Select-Object Name, @{N='KB';E={[math]::Round\\($_.Length/1KB,0\\)}})",
+      "PowerShell(New-Item -ItemType Directory -Force -Path \"c:\\\\Users\\\\Enzo\\\\Documents\\\\f1000 transportadora\\\\src\\\\pages\")"
+    ]
+  }
+}
