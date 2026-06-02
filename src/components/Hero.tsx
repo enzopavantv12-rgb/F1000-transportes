@@ -16,39 +16,38 @@ export function Hero() {
         {/* Camada 1 — Carrossel com Ken Burns */}
         <HeroCarousel />
 
-        {/* Camada 2a — Tonal azul-preto unificador (mix-blend-multiply une as 5 fotos) */}
+        {/* Camada 2a — Tonal azul-escuro: forte à esquerda, desvanece à direita */}
         <div
-          className="absolute inset-0 z-[1] mix-blend-multiply"
+          className="absolute inset-0 z-[1]"
           style={{
-            background: 'linear-gradient(135deg, #053E83 0%, #000000 100%)',
-            opacity: 0.55,
+            background: 'linear-gradient(to right, rgba(3,22,52,0.90) 0%, rgba(5,62,131,0.55) 40%, rgba(5,62,131,0.15) 65%, rgba(0,0,0,0.0) 100%)',
           }}
           aria-hidden="true"
         />
 
-        {/* Camada 2b — Vinheta radial (foco editorial, escurece bordas) */}
+        {/* Camada 2b — Escurecimento esquerda (garante legibilidade do texto) */}
         <div
-          className="absolute inset-0 z-[2]"
+          className="absolute inset-0 z-[2] hidden md:block"
           style={{
-            background: 'radial-gradient(ellipse at center, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.55) 60%, rgba(0,0,0,0.85) 100%)',
+            background: 'linear-gradient(to right, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.30) 35%, rgba(0,0,0,0.05) 60%, rgba(0,0,0,0.0) 100%)',
           }}
           aria-hidden="true"
         />
 
-        {/* Camada 2c — Gradiente direcional desktop */}
+        {/* Camada 2c — Vinheta vertical suave (topo/base) para acabamento desktop */}
         <div
           className="absolute inset-0 z-[3] hidden md:block"
           style={{
-            background: 'linear-gradient(180deg, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.20) 35%, rgba(0,0,0,0.55) 80%, rgba(0,0,0,0.85) 100%)',
+            background: 'linear-gradient(180deg, rgba(0,0,0,0.28) 0%, rgba(0,0,0,0.0) 30%, rgba(0,0,0,0.0) 70%, rgba(0,0,0,0.55) 100%)',
           }}
           aria-hidden="true"
         />
 
-        {/* Camada 2d — Overlay mobile reforçado */}
+        {/* Camada 2d — Overlay mobile: gradiente vertical, sem expor lateral */}
         <div
           className="absolute inset-0 z-[3] md:hidden"
           style={{
-            background: 'linear-gradient(180deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.55) 40%, rgba(0,0,0,0.85) 100%)',
+            background: 'linear-gradient(180deg, rgba(0,0,0,0.60) 0%, rgba(0,0,0,0.40) 45%, rgba(0,0,0,0.65) 100%)',
           }}
           aria-hidden="true"
         />
