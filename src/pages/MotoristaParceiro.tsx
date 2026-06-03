@@ -49,10 +49,11 @@ export default function MotoristaParceiro() {
             Voltar ao site
           </Link>
 
-          <span style={{ fontFamily: 'Inter', fontWeight: 900, fontSize: '1.125rem', color: 'var(--color-deep-black)', letterSpacing: '-0.02em' }}>
-            <span style={{ color: 'var(--color-accent-blue)' }}>F</span>1000
-            <span style={{ fontSize: '0.625rem', fontWeight: 500, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--color-steel)', marginLeft: '6px' }}>Transportes</span>
-          </span>
+          <img
+            src="/logo-f1000-normal.png"
+            alt="F1000 Transportes"
+            style={{ height: '36px', width: 'auto', objectFit: 'contain' }}
+          />
         </div>
       </header>
 
@@ -72,7 +73,7 @@ export default function MotoristaParceiro() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            style={{ fontFamily: 'Fraunces, serif', fontWeight: 400, fontSize: 'clamp(2.5rem,6vw,4.5rem)', color: '#fff', lineHeight: 1.05, letterSpacing: '-0.02em', maxWidth: '900px', fontFeatureSettings: '"ss01"' }}
+            style={{ fontFamily: 'Inter, sans-serif', fontWeight: 800, fontSize: 'clamp(2.5rem,6vw,4.5rem)', color: '#fff', lineHeight: 1.05, letterSpacing: '-0.02em', maxWidth: '900px', fontFeatureSettings: '"ss01"' }}
           >
             Rotas industriais, pagamento em dia, parceria que dura.
           </motion.h1>
@@ -94,7 +95,7 @@ export default function MotoristaParceiro() {
           <p style={{ fontFamily: 'Inter', fontWeight: 500, fontSize: '12px', letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--color-deep-blue)', marginBottom: '16px' }}>
             Por que rodar com a F1000
           </p>
-          <h2 style={{ fontFamily: 'Fraunces, serif', fontWeight: 400, fontSize: 'clamp(2rem,4vw,3rem)', color: 'var(--color-deep-black)', lineHeight: 1.1, letterSpacing: '-0.015em', marginBottom: '64px', maxWidth: '700px', fontFeatureSettings: '"ss01"' }}>
+          <h2 style={{ fontFamily: 'Inter, sans-serif', fontWeight: 400, fontSize: 'clamp(2rem,4vw,3rem)', color: 'var(--color-deep-black)', lineHeight: 1.1, letterSpacing: '-0.015em', marginBottom: '64px', maxWidth: '700px', fontFeatureSettings: '"ss01"' }}>
             Operação madura, gestão clara, fluxo constante.
           </h2>
 
@@ -127,7 +128,7 @@ export default function MotoristaParceiro() {
           <p style={{ fontFamily: 'Inter', fontWeight: 500, fontSize: '12px', letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--color-deep-blue)', marginBottom: '16px' }}>
             Cadastro
           </p>
-          <h2 style={{ fontFamily: 'Fraunces, serif', fontWeight: 400, fontSize: 'clamp(1.875rem,3.5vw,2.75rem)', color: '#fff', lineHeight: 1.1, letterSpacing: '-0.015em', marginBottom: '16px', fontFeatureSettings: '"ss01"' }}>
+          <h2 style={{ fontFamily: 'Inter, sans-serif', fontWeight: 400, fontSize: 'clamp(1.875rem,3.5vw,2.75rem)', color: '#fff', lineHeight: 1.1, letterSpacing: '-0.015em', marginBottom: '16px', fontFeatureSettings: '"ss01"' }}>
             Envie seus dados.
           </h2>
           <p style={{ fontFamily: 'Inter', fontSize: '1rem', color: 'rgba(255,255,255,0.55)', lineHeight: 1.65, marginBottom: '48px', maxWidth: '560px' }}>

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
+import { BackgroundGrid } from './ui/BackgroundGrid'
 import { FADE_UP, STAGGER } from '../lib/constants'
 
 interface KPI {
@@ -52,11 +53,13 @@ export function AuthorityBar() {
   return (
     <section
       id="autoridade"
+      className="relative"
       style={{ backgroundColor: 'var(--color-deep-black)', padding: '64px 0' }}
     >
-      <div style={{ maxWidth: '860px', margin: '0 auto', padding: '0 clamp(1.5rem, 6vw, 3rem)' }}>
+      <BackgroundGrid variant="dark" />
+      <div className="container-main relative z-10">
         <motion.div
-          className="grid grid-cols-2 md:grid-cols-5 gap-6 md:gap-0"
+          className="grid grid-cols-2 md:grid-cols-5 gap-8 md:gap-6"
           variants={STAGGER}
           initial="hidden"
           whileInView="visible"
@@ -77,8 +80,8 @@ export function AuthorityBar() {
               )}
               <span
                 style={{
-                  fontFamily: 'Fraunces, serif',
-                  fontWeight: 400,
+                  fontFamily: 'Inter, sans-serif',
+                  fontWeight: 900,
                   fontSize: 'clamp(1.75rem, 3vw, 2.5rem)',
                   color: 'var(--color-pure-white)',
                   lineHeight: 1,

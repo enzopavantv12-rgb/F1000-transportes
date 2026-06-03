@@ -120,7 +120,7 @@ export function DriverForm() {
                 textAlign: 'center',
               }}
             >
-              <p style={{ fontFamily: 'Fraunces, serif', fontSize: '1.5rem', color: 'white', marginBottom: '12px' }}>
+              <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '1.5rem', color: 'white', marginBottom: '12px' }}>
                 Cadastro recebido!
               </p>
               <p style={{ fontFamily: 'Inter', fontSize: '1rem', color: 'var(--color-mist)' }}>

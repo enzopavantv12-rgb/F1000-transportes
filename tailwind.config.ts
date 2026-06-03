@@ -19,11 +19,10 @@ export default {
         'accent-blue': '#1E5BB8',
       },
       fontFamily: {
-        display:   ['Inter', 'sans-serif'],
-        editorial: ['Fraunces', 'serif'],
-        fraunces:  ['Fraunces', 'serif'],
-        inter:     ['Inter', 'sans-serif'],
-        sans:      ['Inter', 'sans-serif'],
+        display: ['Inter', 'sans-serif'],
+        sans:    ['Inter', 'sans-serif'],
+        inter:   ['Inter', 'sans-serif'],
+        mono:    ['JetBrains Mono', 'ui-monospace', 'monospace'],
       },
       fontSize: {
         'hero':    ['clamp(2.75rem, 6vw, 5.5rem)', { lineHeight: '1.05', letterSpacing: '-0.02em' }],

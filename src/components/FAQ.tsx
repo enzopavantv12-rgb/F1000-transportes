@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Plus, Minus } from 'lucide-react'
+import { BackgroundGrid } from './ui/BackgroundGrid'
 import { Eyebrow } from './ui/Eyebrow'
 import { FADE_UP, STAGGER, EMAIL } from '../lib/constants'
 
@@ -90,10 +91,11 @@ export function FAQ() {
   return (
     <section
       id="faq"
-      className="section-padding"
+      className="section-padding relative"
       style={{ backgroundColor: 'var(--color-deep-black)' }}
     >
-      <div className="container-main grid md:grid-cols-12 gap-12 md:gap-16">
+      <BackgroundGrid variant="dark" />
+      <div className="container-main grid md:grid-cols-12 gap-12 md:gap-16 relative z-10">
 
         {/* Coluna esquerda */}
         <motion.div

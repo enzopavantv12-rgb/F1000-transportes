@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { BackgroundGrid } from './ui/BackgroundGrid'
 import { FADE_UP, STAGGER } from '../lib/constants'
 import { Eyebrow } from './ui/Eyebrow'
 
@@ -29,10 +30,11 @@ export function HowItWorks() {
   return (
     <section
       id="como-funciona"
-      className="section-padding"
+      className="section-padding relative"
       style={{ backgroundColor: 'var(--color-deep-black)' }}
     >
-      <div className="container-main flex flex-col gap-14">
+      <BackgroundGrid variant="dark" />
+      <div className="container-main flex flex-col gap-14 relative z-10">
         <motion.div
           className="flex flex-col items-center text-center gap-4"
           variants={STAGGER}
@@ -66,12 +68,12 @@ export function HowItWorks() {
             >
               <span
                 style={{
-                  fontFamily: 'Fraunces, serif',
-                  fontWeight: 400,
+                  fontFamily: 'Inter, sans-serif',
+                  fontWeight: 900,
                   fontSize: '4rem',
                   color: 'rgba(255,255,255,0.15)',
                   lineHeight: 1,
-                  fontFeatureSettings: '"ss01"',
+                  fontFeatureSettings: '"cv11", "ss03", "cv02"',
                 }}
                 aria-hidden="true"
               >

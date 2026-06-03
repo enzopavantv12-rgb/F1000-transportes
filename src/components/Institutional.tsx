@@ -1,88 +1,103 @@
 import { motion } from 'framer-motion'
-import { FADE_UP, STAGGER } from '../lib/constants'
-import { Eyebrow } from './ui/Eyebrow'
+import { Link } from 'react-router-dom'
+import SectionWithMockup from './ui/SectionWithMockup'
+import { InstitutionalDashboard } from './InstitutionalDashboard'
+import { WA_COTACAO } from '../lib/constants'
+
+const SECONDARY_IMG =
+  'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600&q=80&auto=format&fit=crop'
+
+const title = (
+  <>
+    A transportadora que trata<br />
+    cada carga como única.
+  </>
+)
+
+const description = (
+  <div className="flex flex-col gap-4">
+    <p>
+      Fundada em 2013 com o propósito de oferecer logística confiável e sob medida para o mercado
+      brasileiro, a F1000 cresceu de forma estruturada — aliando gestão profissional, compromisso
+      operacional e excelência em atendimento.
+    </p>
+    <p>
+      Da nossa sede em Betim/MG, atendemos toda a malha nacional com foco em indústrias que não podem
+      se permitir falha: óleo &amp; gás, energia, mineração e metalurgia. Cada frete é cotado,
+      programado e acompanhado individualmente.
+    </p>
+
+    <div className="flex flex-col gap-3 mt-2">
+      <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+        <div style={{ width: '60px', height: '1px', backgroundColor: '#053E83', flexShrink: 0 }} />
+        <span style={{ fontFamily: 'Inter', fontSize: '0.8125rem', fontWeight: 500, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#6B7280' }}>
+          Sede operacional · Betim, MG
+        </span>
+      </div>
+
+      <div className="flex flex-col sm:flex-row gap-3 mt-2">
+        <motion.a
+          href={WA_COTACAO}
+          target="_blank"
+          rel="noopener noreferrer"
+          whileHover={{ y: -2 }}
+          transition={{ duration: 0.2 }}
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            backgroundColor: '#053E83',
+            color: '#fff',
+            fontFamily: 'Inter',
+            fontWeight: 700,
+            fontSize: '13px',
+            letterSpacing: '0.1em',
+            textTransform: 'uppercase',
+            padding: '14px 28px',
+            borderRadius: '2px',
+            textDecoration: 'none',
+            whiteSpace: 'nowrap',
+          }}
+        >
+          Solicitar cotação
+        </motion.a>
+        <Link
+          to="/motorista-parceiro"
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            backgroundColor: 'transparent',
+            color: '#000',
+            fontFamily: 'Inter',
+            fontWeight: 600,
+            fontSize: '13px',
+            letterSpacing: '0.1em',
+            textTransform: 'uppercase',
+            padding: '13px 27px',
+            borderRadius: '2px',
+            border: '1px solid #D4D7DD',
+            textDecoration: 'none',
+            whiteSpace: 'nowrap',
+          }}
+        >
+          Motorista parceiro
+        </Link>
+      </div>
+    </div>
+  </div>
+)
 
 export function Institutional() {
   return (
-    <section
-      id="sobre"
-      className="section-padding"
-      style={{ backgroundColor: 'var(--color-paper)' }}
-    >
-      <div className="container-main grid md:grid-cols-12 gap-12 md:gap-16 items-center">
-
-        {/* Texto */}
-        <motion.div
-          className="md:col-span-7 flex flex-col gap-6"
-          variants={STAGGER}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-80px' }}
-        >
-          <motion.div variants={FADE_UP}>
-            <Eyebrow>INSTITUCIONAL</Eyebrow>
-          </motion.div>
-          <motion.div variants={FADE_UP} className="flex flex-col gap-3">
-            <span className="accent-line" />
-            <h2 className="text-section" style={{ color: 'var(--color-deep-black)' }}>
-              A transportadora que trata cada carga como única.
-            </h2>
-          </motion.div>
-
-          <motion.p
-            variants={FADE_UP}
-            style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: '1.65', color: 'var(--color-steel)' }}
-          >
-            Fundada em 2013 com o propósito de oferecer logística confiável e sob medida para o mercado brasileiro, a F1000 cresceu de forma estruturada — aliando gestão profissional, compromisso operacional e excelência em atendimento.
-          </motion.p>
-
-          <motion.p
-            variants={FADE_UP}
-            style={{ fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: '1.65', color: 'var(--color-steel)' }}
-          >
-            Da nossa sede em Betim/MG, atendemos toda a malha nacional com foco em indústrias que não podem se permitir falha: óleo &amp; gás, energia, mineração e metalurgia. Cada frete é cotado, programado e acompanhado individualmente.
-          </motion.p>
-
-          <motion.div variants={FADE_UP} className="flex flex-col gap-2 pt-2">
-            <span className="accent-line" />
-            <span
-              style={{
-                fontFamily: 'Inter',
-                fontSize: '0.8125rem',
-                fontWeight: 500,
-                letterSpacing: '0.08em',
-                textTransform: 'uppercase',
-                color: 'var(--color-steel)',
-              }}
-            >
-              Sede operacional · Betim, MG
-            </span>
-          </motion.div>
-        </motion.div>
-
-        {/* Foto */}
-        <motion.div
-          className="md:col-span-5"
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-        >
-          <div
-            className="relative overflow-hidden"
-            style={{ aspectRatio: '4/5' }}
-          >
-            <img
-              src="https://images.unsplash.com/photo-1565793979286-e3bb7e78e00b?w=700&q=80&auto=format&fit=crop"
-              alt="Equipe operacional da F1000 Transportes no galpão de Betim"
-              className="w-full h-full object-cover"
-              style={{ filter: 'saturate(0.75) contrast(1.05)' }}
-              loading="lazy"
-            />
-          </div>
-        </motion.div>
-
-      </div>
+    <section id="sobre">
+      <SectionWithMockup
+        title={title}
+        description={description}
+        primaryContent={<InstitutionalDashboard />}
+        secondaryImageSrc={SECONDARY_IMG}
+        light
+      />
     </section>
   )
 }

@@ -44,7 +44,13 @@ export function Header() {
             paddingRight: 'clamp(1.25rem, 5vw, 3rem)',
           }}
         >
-          <a href="#" aria-label="F1000 Transportes - Início" style={{ textDecoration: 'none' }}>
+          <a href="#" aria-label="F1000 Transportes - Início" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center' }}>
+            <img
+              src="/logo-f1000-branca.png"
+              alt="F1000 Transportes"
+              style={{ height: '38px', width: 'auto', objectFit: 'contain' }}
+            />
+            {/* Fallback invisible — mantém o link acessível se SVG não carregar */}
             <div
               style={{
                 fontFamily: 'Inter, sans-serif',
@@ -52,7 +58,7 @@ export function Header() {
                 fontSize: '1.25rem',
                 color: '#FFFFFF',
                 letterSpacing: '-0.02em',
-                display: 'flex',
+                display: 'none',
                 alignItems: 'center',
                 gap: '8px',
               }}
@@ -153,10 +159,7 @@ export function Header() {
                 paddingRight: 'clamp(1.25rem, 5vw, 3rem)',
               }}
             >
-              <span style={{ fontFamily: 'Inter', fontWeight: 900, fontSize: '1.25rem', color: '#FFFFFF', letterSpacing: '-0.02em' }}>
-                <span style={{ color: 'var(--color-accent-blue)' }}>F</span>1000{' '}
-                <span style={{ fontSize: '0.6875rem', fontFamily: 'Inter', fontWeight: 500, letterSpacing: '0.16em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)' }}>Transportes</span>
-              </span>
+              <img src="/logo-f1000-branca.png" alt="F1000 Transportes" style={{ height: '38px', width: 'auto', objectFit: 'contain' }} />
               <button
                 onClick={() => setMenuOpen(false)}
                 aria-label="Fechar menu"

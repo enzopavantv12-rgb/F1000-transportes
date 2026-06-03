@@ -81,7 +81,7 @@ export function DriverRegistrationForm() {
     return (
       <div style={{ backgroundColor: 'rgba(255,255,255,0.04)', border: '1px solid rgba(5,62,131,0.4)', borderRadius: '2px', padding: '48px 40px', textAlign: 'center' }}>
         <CheckCircle2 size={40} strokeWidth={1.25} style={{ color: '#053E83', margin: '0 auto 24px' }} />
-        <h3 style={{ fontFamily: 'Fraunces, serif', fontWeight: 400, fontSize: '1.5rem', color: '#fff', marginBottom: '12px' }}>
+        <h3 style={{ fontFamily: 'Inter, sans-serif', fontWeight: 400, fontSize: '1.5rem', color: '#fff', marginBottom: '12px' }}>
           Cadastro enviado.
         </h3>
         <p style={{ fontFamily: 'Inter', fontSize: '1rem', color: 'rgba(255,255,255,0.55)', lineHeight: 1.65 }}>

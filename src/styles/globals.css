@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Inter:wght@300;400;500;600;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,900;1,14..32,400;1,14..32,700&family=JetBrains+Mono:wght@400;500&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -14,6 +14,7 @@
   --color-paper:       #F5F2EC;
   --color-pure-white:  #FFFFFF;
   --color-accent-blue: #1E5BB8;
+  font-feature-settings: 'cv11', 'ss03', 'cv02';
 }
 
 @layer base {
@@ -36,8 +37,9 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Fraunces', serif;
-    font-feature-settings: 'ss01';
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-feature-settings: 'cv11', 'ss03', 'cv02';
   }
 
   *:focus-visible {
@@ -70,27 +72,29 @@
     padding-bottom: clamp(5rem, 10vw, 9rem);
   }
 
+  /* Remapped: antigo .text-hero agora usa Inter Black */
   .text-hero {
     font-size: clamp(2.75rem, 6vw, 5.5rem);
     line-height: 1.05;
     letter-spacing: -0.02em;
-    font-family: 'Fraunces', serif;
-    font-weight: 400;
-    font-feature-settings: 'ss01';
+    font-family: 'Inter', sans-serif;
+    font-weight: 900;
+    font-feature-settings: 'cv11', 'ss03', 'cv02';
   }
 
+  /* Remapped: antigo .text-section agora usa Inter Bold */
   .text-section {
     font-size: clamp(2rem, 4vw, 3.25rem);
     line-height: 1.1;
     letter-spacing: -0.015em;
-    font-family: 'Fraunces', serif;
-    font-weight: 400;
-    font-feature-settings: 'ss01';
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-feature-settings: 'cv11', 'ss03', 'cv02';
   }
 
   .text-eyebrow {
     font-size: 0.75rem;
-    font-family: 'Inter', sans-serif;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
     font-weight: 500;
     letter-spacing: 0.18em;
     text-transform: uppercase;
@@ -104,8 +108,8 @@
     background-color: var(--color-deep-blue);
     color: white;
     font-family: 'Inter', sans-serif;
-    font-weight: 500;
-    font-size: 0.9375rem;
+    font-weight: 600;
+    font-size: 0.875rem;
     padding: 14px 24px;
     border-radius: 2px;
     text-decoration: none;
@@ -113,6 +117,7 @@
     cursor: pointer;
     transition: background-color 200ms ease;
     white-space: nowrap;
+    letter-spacing: 0.03em;
   }
 
   .btn-primary:hover {
@@ -126,8 +131,8 @@
     background-color: transparent;
     color: var(--color-deep-black);
     font-family: 'Inter', sans-serif;
-    font-weight: 500;
-    font-size: 0.9375rem;
+    font-weight: 600;
+    font-size: 0.875rem;
     padding: 14px 24px;
     border-radius: 2px;
     text-decoration: none;
@@ -149,8 +154,8 @@
     background-color: transparent;
     color: white;
     font-family: 'Inter', sans-serif;
-    font-weight: 500;
-    font-size: 0.9375rem;
+    font-weight: 600;
+    font-size: 0.875rem;
     padding: 14px 24px;
     border-radius: 2px;
     text-decoration: none;
@@ -170,5 +175,15 @@
     height: 1px;
     background-color: var(--color-deep-blue);
     display: block;
+  }
+
+  .font-display {
+    font-family: 'Inter', sans-serif;
+    font-feature-settings: 'cv11', 'ss03', 'cv02';
+    font-optical-sizing: auto;
+  }
+
+  .font-mono {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
   }
 }

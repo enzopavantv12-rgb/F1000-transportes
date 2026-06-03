@@ -1,43 +1,26 @@
 import { Instagram, Linkedin, MapPin, Clock, Phone, Mail } from 'lucide-react'
+import { BackgroundGrid } from './ui/BackgroundGrid'
 import { ADDRESS, EMAIL, HOURS, INSTAGRAM, LINKEDIN, PHONE_PRIMARY, PHONE_SECONDARY } from '../lib/constants'
 
 export function Footer() {
   const year = new Date().getFullYear()
 
   return (
-    <footer style={{ backgroundColor: 'var(--color-ink)' }}>
+    <footer className="relative" style={{ backgroundColor: 'var(--color-ink)' }}>
+      <BackgroundGrid variant="dark" />
       <div
-        className="container-main"
+        className="container-main relative z-10"
         style={{ paddingTop: 'clamp(4rem, 8vw, 6rem)', paddingBottom: '2rem' }}
       >
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-12 pb-12">
 
           {/* Col 1 — Logo + endereço */}
           <div className="flex flex-col gap-5">
-            <span
-              style={{
-                fontFamily: 'Fraunces, serif',
-                fontWeight: 500,
-                fontSize: '1.375rem',
-                color: 'white',
-                letterSpacing: '-0.01em',
-                fontFeatureSettings: '"ss01"',
-              }}
-            >
-              <span style={{ color: 'var(--color-accent-blue)' }}>F</span>1000{' '}
-              <span
-                style={{
-                  fontSize: '0.75rem',
-                  fontFamily: 'Inter',
-                  fontWeight: 500,
-                  letterSpacing: '0.12em',
-                  textTransform: 'uppercase',
-                  color: 'rgba(255,255,255,0.4)',
-                }}
-              >
-                Transportes
-              </span>
-            </span>
+            <img
+              src="/logo-f1000-branca.png"
+              alt="F1000 Transportes"
+              style={{ height: '40px', width: 'auto', objectFit: 'contain' }}
+            />
 
             <div className="flex flex-col gap-3">
               <div className="flex gap-3">

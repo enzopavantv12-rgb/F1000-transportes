@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { Eyebrow } from './ui/Eyebrow'
+import { BackgroundGrid } from './ui/BackgroundGrid'
 import { FADE_UP, STAGGER } from '../lib/constants'
 
 const TESTIMONIALS = [
@@ -27,10 +28,11 @@ export function Testimonials() {
   return (
     <section
       id="depoimentos"
-      className="section-padding"
+      className="section-padding relative"
       style={{ backgroundColor: 'var(--color-paper)' }}
     >
-      <div className="container-main flex flex-col gap-14">
+      <BackgroundGrid variant="light" />
+      <div className="container-main flex flex-col gap-14 relative z-10">
         <motion.div
           className="flex flex-col items-center text-center gap-4"
           variants={STAGGER}
@@ -67,11 +69,11 @@ export function Testimonials() {
             >
               <span
                 style={{
-                  fontFamily: 'Fraunces, serif',
-                  fontSize: '4rem',
+                  fontFamily: 'Inter, sans-serif',
+                  fontSize: '3rem',
                   lineHeight: 1,
                   color: 'var(--color-deep-blue)',
-                  fontWeight: 400,
+                  fontWeight: 900,
                 }}
                 aria-hidden="true"
               >
@@ -80,9 +82,9 @@ export function Testimonials() {
 
               <p
                 style={{
-                  fontFamily: 'Fraunces, serif',
+                  fontFamily: 'Inter, sans-serif',
                   fontStyle: 'italic',
-                  fontWeight: 300,
+                  fontWeight: 400,
                   fontSize: '1.125rem',
                   lineHeight: 1.5,
                   color: 'var(--color-deep-black)',

@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { BackgroundGrid } from './ui/BackgroundGrid'
 import { FADE_UP, STAGGER, WA_COTACAO, EMAIL } from '../lib/constants'
 import { Eyebrow } from './ui/Eyebrow'
 import { Button } from './ui/Button'
@@ -7,13 +8,15 @@ export function FinalCTA() {
   return (
     <section
       id="cta-final"
+      className="relative"
       style={{
         backgroundColor: 'var(--color-deep-black)',
         paddingTop: '120px',
         paddingBottom: '120px',
       }}
     >
-      <div className="container-main">
+      <BackgroundGrid variant="dark" />
+      <div className="container-main relative z-10">
         <motion.div
           className="flex flex-col items-center text-center gap-8"
           variants={STAGGER}

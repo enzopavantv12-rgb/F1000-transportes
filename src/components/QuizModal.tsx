@@ -72,7 +72,7 @@ function calcularResultado(d: QuizData): Resultado {
 function StepWrapper({ title, sub, children }: { title: string; sub: string; children: React.ReactNode }) {
   return (
     <div>
-      <h3 style={{ fontFamily: 'Fraunces, serif', fontSize: 'clamp(1.5rem,3vw,2rem)', fontWeight: 400, color: '#000', lineHeight: 1.15, marginBottom: '12px' }}>
+      <h3 style={{ fontFamily: 'Inter, sans-serif', fontSize: 'clamp(1.5rem,3vw,2rem)', fontWeight: 700, color: '#000', lineHeight: 1.15, marginBottom: '12px' }}>
         {title}
       </h3>
       <p style={{ fontFamily: 'Inter', fontSize: '0.9375rem', color: '#6B7280', marginBottom: '32px', lineHeight: 1.6 }}>
@@ -264,7 +264,7 @@ export function QuizModal({ open, onClose }: QuizModalProps) {
             {resultado === 'vermelho' && (
               <div style={{ textAlign: 'center', padding: '32px 0' }}>
                 <Ban size={48} strokeWidth={1.25} style={{ color: '#053E83', margin: '0 auto 24px' }} />
-                <h3 style={{ fontFamily: 'Fraunces, serif', fontSize: '1.875rem', fontWeight: 400, color: '#000', marginBottom: '16px' }}>
+                <h3 style={{ fontFamily: 'Inter, sans-serif', fontSize: '1.875rem', fontWeight: 700, color: '#000', marginBottom: '16px' }}>
                   Esse perfil não é o nosso.
                 </h3>
                 <p style={{ fontFamily: 'Inter', fontSize: '1rem', color: '#6B7280', lineHeight: 1.65, maxWidth: '500px', margin: '0 auto 32px' }}>
@@ -283,7 +283,7 @@ export function QuizModal({ open, onClose }: QuizModalProps) {
                   ? <CheckCircle2 size={48} strokeWidth={1.25} style={{ color: '#053E83', margin: '0 auto 24px' }} />
                   : <AlertTriangle size={48} strokeWidth={1.25} style={{ color: '#053E83', margin: '0 auto 24px' }} />
                 }
-                <h3 style={{ fontFamily: 'Fraunces, serif', fontSize: '1.875rem', fontWeight: 400, color: '#000', marginBottom: '16px' }}>
+                <h3 style={{ fontFamily: 'Inter, sans-serif', fontSize: '1.875rem', fontWeight: 700, color: '#000', marginBottom: '16px' }}>
                   {resultado === 'verde' ? 'Cotação enviada.' : 'Enviado com observação.'}
                 </h3>
                 <p style={{ fontFamily: 'Inter', fontSize: '1rem', color: '#6B7280', lineHeight: 1.65, maxWidth: '500px', margin: '0 auto 8px' }}>
