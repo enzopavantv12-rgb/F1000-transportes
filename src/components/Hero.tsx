@@ -69,7 +69,7 @@ export function Hero() {
             className="mx-auto w-full"
             style={{ maxWidth: '1440px', paddingLeft: 'clamp(1.5rem,8vw,6rem)', paddingRight: 'clamp(1.5rem,8vw,6rem)' }}
           >
-            <div style={{ maxWidth: '680px' }}>
+            <div className="text-center md:text-left" style={{ maxWidth: '680px' }}>
 
               {/* Eyebrow */}
               <motion.p
@@ -140,7 +140,7 @@ export function Hero() {
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.95, duration: 0.6 }}
-                className="flex flex-col sm:flex-row gap-3 sm:gap-4"
+                className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-center sm:items-start"
               >
                 <button
                   onClick={() => setQuizOpen(true)}

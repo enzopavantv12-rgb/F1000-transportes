@@ -53,7 +53,7 @@ export function FinalCTA() {
             Resposta em 15 minutos · Cotação por WhatsApp ou e-mail
           </motion.p>
 
-          <motion.div variants={FADE_UP} className="flex flex-col sm:flex-row gap-4">
+          <motion.div variants={FADE_UP} className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto px-4 sm:px-0">
             <Button
               href={WA_COTACAO}
               target="_blank"

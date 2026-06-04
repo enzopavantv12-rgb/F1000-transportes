@@ -90,7 +90,7 @@ export function Sectors() {
               <motion.div
                 key={s.title}
                 variants={FADE_UP}
-                className="flex flex-col gap-4 p-8"
+                className="flex flex-col gap-4 p-8 text-center sm:text-left items-center sm:items-start"
                 style={{
                   backgroundColor: 'var(--color-graphite)',
                   border: '1px solid rgba(255,255,255,0.08)',

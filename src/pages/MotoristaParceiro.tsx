@@ -1,8 +1,9 @@
-import { useEffect } from 'react'
+import { Helmet } from 'react-helmet-async'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { ArrowLeft, Truck, Shield, Clock, MapPin } from 'lucide-react'
+import { ArrowLeft, Truck, Shield, Clock, MapPin, Instagram, Linkedin } from 'lucide-react'
 import { DriverRegistrationForm } from '../components/DriverRegistrationForm'
+import { MinimalistHero } from '../components/ui/minimalist-hero'
 import { FADE_UP } from '../lib/constants'
 
 const BENEFICIOS = [
@@ -13,15 +14,25 @@ const BENEFICIOS = [
 ]
 
 export default function MotoristaParceiro() {
-  useEffect(() => {
-    document.title = 'Motorista Parceiro · F1000 Transportes'
-    const meta = document.querySelector('meta[name="description"]')
-    if (meta) meta.setAttribute('content', 'Cadastre-se como motorista ou agregado parceiro da F1000 Transportes. Operação industrial, rotas nacionais, pagamento em dia.')
-    window.scrollTo(0, 0)
-  }, [])
-
   return (
     <div style={{ minHeight: '100vh', backgroundColor: '#F5F2EC' }}>
+      <Helmet>
+        <title>Motorista Parceiro — F1000 Transportes</title>
+        <meta name="description" content="Cadastre-se como motorista parceiro da F1000 Transportes. Rotas industriais recorrentes, CT-e e MDF-e emitidos antes do carregamento, pagamento no prazo." />
+        <link rel="canonical" href="https://f1000transportes.com/motorista-parceiro" />
+        <meta property="og:url" content="https://f1000transportes.com/motorista-parceiro" />
+        <meta property="og:title" content="Motorista Parceiro — F1000 Transportes" />
+        <meta property="og:description" content="Cadastre-se como motorista parceiro da F1000. Rotas industriais recorrentes, pagamento no prazo." />
+      </Helmet>
+
+      {/* Skip-link */}
+      <a
+        href="#conteudo"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[200] focus:rounded focus:bg-white focus:px-4 focus:py-2 focus:text-black focus:shadow-lg"
+        style={{ fontFamily: 'Inter, sans-serif', fontSize: '14px', fontWeight: 600 }}
+      >
+        Pular para o conteúdo
+      </a>
 
       {/* Header minimalista */}
       <header
@@ -57,37 +68,26 @@ export default function MotoristaParceiro() {
         </div>
       </header>
 
-      {/* Hero curto */}
-      <section style={{ backgroundColor: '#000', color: '#fff', padding: 'clamp(4rem,10vw,8rem) 0' }}>
-        <div style={{ maxWidth: '1280px', margin: '0 auto', paddingLeft: 'clamp(1.25rem,5vw,3rem)', paddingRight: 'clamp(1.25rem,5vw,3rem)' }}>
-          <motion.p
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            style={{ fontFamily: 'Inter', fontWeight: 500, fontSize: '12px', letterSpacing: '0.22em', textTransform: 'uppercase', color: 'var(--color-accent-blue)', marginBottom: '32px' }}
-          >
-            Motoristas e Agregados
-          </motion.p>
+      <main id="conteudo">
 
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            style={{ fontFamily: 'Inter, sans-serif', fontWeight: 800, fontSize: 'clamp(2.5rem,6vw,4.5rem)', color: '#fff', lineHeight: 1.05, letterSpacing: '-0.02em', maxWidth: '900px', fontFeatureSettings: '"ss01"' }}
-          >
-            Rotas industriais, pagamento em dia, parceria que dura.
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.7 }}
-            style={{ marginTop: '40px', maxWidth: '640px', fontFamily: 'Inter', fontSize: '1.0625rem', lineHeight: 1.65, color: 'rgba(255,255,255,0.6)' }}
-          >
-            Buscamos motoristas e transportadores parceiros com documentação em dia, perfil técnico e disposição para operações recorrentes. Cadastre-se e nosso operacional entra em contato quando houver rota compatível.
-          </motion.p>
-        </div>
-      </section>
+      {/* Hero — MinimalistHero adaptado */}
+      <MinimalistHero
+        eyebrow="Motoristas · Agregados · Parceiros"
+        mainText="Rotas industriais recorrentes. CT-e e MDF-e emitidos antes do carregamento. Pagamento no prazo combinado, sempre. Documentação 100% em dia."
+        onScrollToForm={() => {
+          const el = document.getElementById('formulario-motorista')
+          if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        }}
+        readMoreLabel="Quero me cadastrar"
+        imageSrc="/imagens-hero/scania.deitada%20final.webp"
+        imageAlt="Caminhão Scania em operação F1000 Transportes"
+        overlayText={{ part1: 'ROTA', part2: 'CERTA.' }}
+        socialLinks={[
+          { icon: Instagram, href: 'https://instagram.com/f1000transportesltda', label: 'Instagram F1000' },
+          { icon: Linkedin,  href: 'https://linkedin.com/company/f1000-transportes',  label: 'LinkedIn F1000' },
+        ]}
+        locationText="Betim/MG · Cobertura Nacional"
+      />
 
       {/* Benefícios */}
       <section style={{ padding: 'clamp(4rem,8vw,7rem) 0', backgroundColor: '#F5F2EC' }}>
@@ -123,7 +123,10 @@ export default function MotoristaParceiro() {
       </section>
 
       {/* Formulário */}
-      <section style={{ padding: 'clamp(4rem,8vw,7rem) 0', backgroundColor: '#0A0A0A' }}>
+      <section
+        id="formulario-motorista"
+        style={{ padding: 'clamp(4rem,8vw,7rem) 0', backgroundColor: '#0A0A0A', scrollMarginTop: '80px' }}
+      >
         <div style={{ maxWidth: '920px', margin: '0 auto', paddingLeft: 'clamp(1.25rem,5vw,3rem)', paddingRight: 'clamp(1.25rem,5vw,3rem)' }}>
           <p style={{ fontFamily: 'Inter', fontWeight: 500, fontSize: '12px', letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--color-deep-blue)', marginBottom: '16px' }}>
             Cadastro
@@ -137,6 +140,8 @@ export default function MotoristaParceiro() {
           <DriverRegistrationForm />
         </div>
       </section>
+
+      </main>
 
       {/* Footer reduzido */}
       <footer style={{ backgroundColor: '#000', borderTop: '1px solid rgba(255,255,255,0.08)', padding: '48px 0' }}>

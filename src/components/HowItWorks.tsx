@@ -64,7 +64,7 @@ export function HowItWorks() {
             <motion.div
               key={step.n}
               variants={FADE_UP}
-              className="flex flex-col gap-4"
+              className="flex flex-col gap-4 text-center md:text-left items-center md:items-start"
             >
               <span
                 style={{

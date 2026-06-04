@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,900;1,14..32,400;1,14..32,700&family=JetBrains+Mono:wght@400;500&display=swap');
+/* Fontes carregadas via preload não bloqueante em index.html */
 
 @tailwind base;
 @tailwind components;
@@ -63,8 +63,8 @@
   .container-main {
     max-width: 1280px;
     margin: 0 auto;
-    padding-left: clamp(1.25rem, 5vw, 3rem);
-    padding-right: clamp(1.25rem, 5vw, 3rem);
+    padding-left: clamp(1.5rem, 5vw, 3rem);
+    padding-right: clamp(1.5rem, 5vw, 3rem);
   }
 
   .section-padding {

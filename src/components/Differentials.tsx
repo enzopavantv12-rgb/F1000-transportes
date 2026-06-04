@@ -1,6 +1,5 @@
 import { useRef, useEffect } from 'react'
 import { motion, useMotionValue, useTransform, animate, useInView } from 'framer-motion'
-import { BackgroundGrid } from './ui/BackgroundGrid'
 
 const BORDER_COLOR = 'rgba(5,62,131,0.12)'
 
@@ -74,7 +73,7 @@ function CardCompact({
     <motion.div
       custom={custom}
       variants={ITEM}
-      className="group flex flex-col justify-between p-8 md:p-10"
+      className="group flex flex-col justify-between p-8 md:p-10 text-center md:text-left items-center md:items-start"
       style={{
         borderRight: borderRight ? `1px solid ${BORDER_COLOR}` : undefined,
         borderBottom: `1px solid ${BORDER_COLOR}`,
@@ -125,8 +124,6 @@ export function Differentials() {
       className="relative section-padding overflow-hidden"
       style={{ backgroundColor: 'var(--color-paper)' }}
     >
-      <BackgroundGrid variant="light" />
-
       {/* Ruído analógico sutil */}
       <div
         className="absolute inset-0 pointer-events-none z-0"
@@ -159,7 +156,7 @@ export function Differentials() {
 
         {/* ── Eyebrow + Headline ── */}
         <motion.div
-          className="flex flex-col gap-4 mb-16"
+          className="flex flex-col gap-4 mb-16 text-center md:text-left items-center md:items-start"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-80px' }}
@@ -233,7 +230,7 @@ export function Differentials() {
           <motion.div
             custom={0}
             variants={ITEM}
-            className="group col-span-12 lg:col-span-6 p-8 md:p-10 flex flex-col justify-between"
+            className="group col-span-12 lg:col-span-6 p-8 md:p-10 flex flex-col justify-between text-center md:text-left items-center md:items-start"
             style={{
               borderBottom: `1px solid ${BORDER_COLOR}`,
               borderRight: undefined,
@@ -350,7 +347,7 @@ export function Differentials() {
           <motion.div
             custom={4}
             variants={ITEM}
-            className="group col-span-12 md:col-span-12 lg:col-span-6 p-8 md:p-10 flex flex-col justify-between
+            className="group col-span-12 md:col-span-12 lg:col-span-6 p-8 md:p-10 flex flex-col justify-between text-center md:text-left items-center md:items-start
                        border-b md:border-b-0 md:order-6 lg:order-5"
             style={{
               borderBottom: `1px solid ${BORDER_COLOR}`,

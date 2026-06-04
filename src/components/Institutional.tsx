@@ -35,7 +35,7 @@ const description = (
         </span>
       </div>
 
-      <div className="flex flex-col sm:flex-row gap-3 mt-2">
+      <div className="flex flex-col sm:flex-row gap-3 mt-2 items-center sm:items-start">
         <motion.a
           href={WA_COTACAO}
           target="_blank"

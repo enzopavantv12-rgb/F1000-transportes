@@ -48,6 +48,8 @@ export function Header() {
             <img
               src="/logo-f1000-branca.png"
               alt="F1000 Transportes"
+              width={160}
+              height={38}
               style={{ height: '38px', width: 'auto', objectFit: 'contain' }}
             />
             {/* Fallback invisible — mantém o link acessível se SVG não carregar */}

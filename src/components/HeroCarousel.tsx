@@ -8,11 +8,11 @@ interface HeroImage {
 }
 
 const HERO_IMAGES: HeroImage[] = [
-  { src: '/imagens-hero/scania.atualizado.horizontal.webp',      alt: 'Caminhão Scania em operação F1000 Transportes',        objectPosition: 'right center' },
-  { src: '/imagens-hero/iveco.atualizado%20horizontal.webp',     alt: 'Caminhão Iveco em operação F1000 Transportes',         objectPosition: 'right center' },
-  { src: '/imagens-hero/mercedes.atualizado%20horizontal.webp',  alt: 'Caminhão Mercedes-Benz em operação F1000 Transportes', objectPosition: 'right center' },
-  { src: '/imagens-hero/volvo.atualizado%20horizontal.webp',     alt: 'Caminhão Volvo em operação F1000 Transportes',         objectPosition: 'right center' },
-  { src: '/imagens-hero/vw.atualizado%20horizontal.webp',        alt: 'Caminhão Volkswagen em operação F1000 Transportes',    objectPosition: 'right center' },
+  { src: '/imagens-hero/scania.deitada%20final.webp',            alt: 'Caminhão Scania carreta fechada — F1000 Transportes',          objectPosition: 'center center' },
+  { src: '/imagens-hero/iveco.deitada%20final.webp',             alt: 'Caminhão Iveco carreta fechada — F1000 Transportes',           objectPosition: 'center center' },
+  { src: '/imagens-hero/mercedes.atualizado%20horizontal.webp',  alt: 'Caminhão Mercedes-Benz carreta industrial — F1000 Transportes', objectPosition: 'right center' },
+  { src: '/imagens-hero/volvo.atualizado%20horizontal.webp',     alt: 'Caminhão Volvo sider — F1000 Transportes',                     objectPosition: 'right center' },
+  { src: '/imagens-hero/vw.atualizado%20horizontal.webp',        alt: 'Caminhão Volkswagen sider — F1000 Transportes',                objectPosition: 'right center' },
 ]
 
 const SLIDE_DURATION_MS = 6000

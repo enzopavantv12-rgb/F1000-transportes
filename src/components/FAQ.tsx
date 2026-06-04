@@ -99,7 +99,7 @@ export function FAQ() {
 
         {/* Coluna esquerda */}
         <motion.div
-          className="md:col-span-4 flex flex-col gap-6"
+          className="md:col-span-4 flex flex-col gap-6 text-center md:text-left items-center md:items-start"
           variants={STAGGER}
           initial="hidden"
           whileInView="visible"

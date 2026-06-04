@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { X, ArrowRight, ArrowLeft, CheckCircle2, AlertTriangle, Ban } from 'lucide-react'
+import { X, ArrowRight, ArrowLeft, CheckCircle2 } from 'lucide-react'
 
 interface QuizModalProps {
   open: boolean
@@ -8,11 +8,7 @@ interface QuizModalProps {
 }
 
 type Modalidade = 'fracionado' | 'dedicado' | 'especial' | 'urgente'
-type TipoCarga =
-  | 'aco' | 'equipamentos' | 'energia' | 'oleo-gas' | 'mineracao'
-  | 'gerador' | 'outro-industrial' | 'mudanca' | 'motofrete' | 'pequeno-volume'
-type Frequencia = 'avulso' | 'mensal' | 'semanal' | 'recorrente'
-type Resultado = 'verde' | 'amarelo' | 'vermelho' | null
+type TipoCarga = 'aco' | 'equipamentos' | 'energia' | 'oleo-gas' | 'mineracao' | 'outros'
 
 interface QuizData {
   modalidade: Modalidade | ''
@@ -20,51 +16,32 @@ interface QuizData {
   origem: string
   destino: string
   pesoFaixa: string
-  valorNF: string
-  frequencia: Frequencia | ''
   nome: string
   whatsapp: string
-  empresa: string
+  email: string
 }
 
 const INITIAL: QuizData = {
   modalidade: '', tipoCarga: '', origem: '', destino: '',
-  pesoFaixa: '', valorNF: '', frequencia: '',
-  nome: '', whatsapp: '', empresa: '',
+  pesoFaixa: '', nome: '', whatsapp: '', email: '',
 }
 
-const TOTAL_STEPS = 6
+const TOTAL_STEPS = 5
 
 const LABEL_MODALIDADE: Record<Modalidade, string> = {
   fracionado: 'Frete Fracionado',
-  dedicado: 'Frete Dedicado',
-  especial: 'Carga Especial',
-  urgente: 'Frete Urgente',
-}
-const LABEL_TIPO: Record<TipoCarga, string> = {
-  aco: 'Aço, bobinas, chapas',
-  equipamentos: 'Equipamentos industriais',
-  energia: 'Painéis solares / energia',
-  'oleo-gas': 'Óleo & gás',
-  mineracao: 'Mineração',
-  gerador: 'Gerador de energia',
-  'outro-industrial': 'Outro industrial',
-  mudanca: 'Mudança residencial',
-  motofrete: 'Motofrete',
-  'pequeno-volume': 'Pequeno volume',
-}
-const LABEL_FREQUENCIA: Record<Frequencia, string> = {
-  avulso: 'Avulso',
-  mensal: 'Mensal',
-  semanal: 'Semanal',
-  recorrente: 'Recorrente / contrato',
+  dedicado:   'Frete Dedicado',
+  especial:   'Carga Especial',
+  urgente:    'Frete Urgente',
 }
 
-function calcularResultado(d: QuizData): Resultado {
-  if (d.tipoCarga === 'mudanca' || d.tipoCarga === 'motofrete' || d.tipoCarga === 'pequeno-volume') return 'vermelho'
-  if (d.pesoFaixa === 'ate-100kg') return 'vermelho'
-  if (d.tipoCarga === 'gerador') return 'amarelo'
-  return 'verde'
+const LABEL_TIPO: Record<TipoCarga, string> = {
+  aco:          'Aço, bobinas, chapas',
+  equipamentos: 'Equipamentos industriais',
+  energia:      'Energia (geradores, transformadores, solar)',
+  'oleo-gas':   'Óleo & gás',
+  mineracao:    'Mineração',
+  outros:       'Outros — descrever no contato',
 }
 
 // ── Sub-components ─────────────────────────────────────────────────────────
@@ -89,9 +66,10 @@ function OptionCard({ selected, onClick, title, desc }: { selected: boolean; onC
       type="button"
       onClick={onClick}
       style={{
-        textAlign: 'left', padding: '20px', border: `1px solid ${selected ? '#053E83' : '#D4D7DD'}`,
-        backgroundColor: selected ? 'rgba(5,62,131,0.04)' : '#fff', borderRadius: '2px',
-        cursor: 'pointer', transition: 'border-color 150ms', width: '100%',
+        textAlign: 'left', padding: '20px',
+        border: `1px solid ${selected ? '#053E83' : '#D4D7DD'}`,
+        backgroundColor: selected ? 'rgba(5,62,131,0.04)' : '#fff',
+        borderRadius: '2px', cursor: 'pointer', transition: 'border-color 150ms', width: '100%',
       }}
     >
       <p style={{ fontFamily: 'Inter', fontWeight: 500, fontSize: '0.9375rem', color: '#000', marginBottom: '4px' }}>{title}</p>
@@ -106,9 +84,10 @@ function OptionCompact({ selected, onClick, title }: { selected: boolean; onClic
       type="button"
       onClick={onClick}
       style={{
-        textAlign: 'left', padding: '14px 16px', border: `1px solid ${selected ? '#053E83' : '#D4D7DD'}`,
-        backgroundColor: selected ? 'rgba(5,62,131,0.04)' : '#fff', borderRadius: '2px',
-        cursor: 'pointer', transition: 'border-color 150ms', width: '100%',
+        textAlign: 'left', padding: '14px 16px',
+        border: `1px solid ${selected ? '#053E83' : '#D4D7DD'}`,
+        backgroundColor: selected ? 'rgba(5,62,131,0.04)' : '#fff',
+        borderRadius: '2px', cursor: 'pointer', transition: 'border-color 150ms', width: '100%',
         fontFamily: 'Inter', fontSize: '0.9375rem', color: '#000',
       }}
     >
@@ -143,14 +122,14 @@ function TextInput({ label, value, onChange, placeholder, type = 'text' }: {
 export function QuizModal({ open, onClose }: QuizModalProps) {
   const [step, setStep] = useState(0)
   const [data, setData] = useState<QuizData>(INITIAL)
-  const [resultado, setResultado] = useState<Resultado>(null)
+  const [enviado, setEnviado] = useState(false)
 
   useEffect(() => {
     if (open) {
       document.body.style.overflow = 'hidden'
       setStep(0)
       setData(INITIAL)
-      setResultado(null)
+      setEnviado(false)
     } else {
       document.body.style.overflow = ''
     }
@@ -166,53 +145,32 @@ export function QuizModal({ open, onClose }: QuizModalProps) {
       case 1: return data.tipoCarga !== ''
       case 2: return data.origem.length > 2 && data.destino.length > 2
       case 3: return data.pesoFaixa !== ''
-      case 4: return data.valorNF !== '' && data.frequencia !== ''
-      case 5: return data.nome.length > 2 && data.whatsapp.length > 8 && data.empresa.length > 2
+      case 4: return data.nome.length > 2 && data.whatsapp.length > 8 && data.email.includes('@')
       default: return false
     }
   }
 
-  const avancar = () => {
-    // Qualificação após tipo de carga (step 1) e peso (step 3)
-    if (step === 1 || step === 3) {
-      const res = calcularResultado(data)
-      if (res === 'vermelho') { setResultado('vermelho'); return }
-    }
-    setStep(s => s + 1)
-  }
-
   const finalizar = () => {
-    const res = calcularResultado(data)
-    setResultado(res)
-    if (res === 'verde' || res === 'amarelo') {
-      const isRecorrente = data.frequencia === 'recorrente' || data.frequencia === 'semanal'
-      const tag = res === 'amarelo'
-        ? '⚠ EXIGE CONFIRMAÇÃO PRÉVIA'
-        : isRecorrente
-          ? '⭐ LEAD RECORRENTE — PRIORIDADE'
-          : '🟢 LEAD QUALIFICADO'
+    const msg = [
+      '🔥 *NOVO LEAD — F1000 Transportes*',
+      '━━━━━━━━━━━━━━━━━━━━━━',
+      '',
+      `📋 *Modalidade:* ${LABEL_MODALIDADE[data.modalidade as Modalidade]}`,
+      `📦 *Tipo de carga:* ${LABEL_TIPO[data.tipoCarga as TipoCarga]}`,
+      `📍 *Origem:* ${data.origem}`,
+      `📍 *Destino:* ${data.destino}`,
+      `⚖️ *Peso aproximado:* ${data.pesoFaixa}`,
+      '',
+      '━━━━━━━━━━━━━━━━━━━━━━',
+      `👤 *Nome:* ${data.nome}`,
+      `📱 *WhatsApp:* ${data.whatsapp}`,
+      `✉️ *E-mail:* ${data.email}`,
+      '',
+      '_Enviado via site f1000transportes.com_',
+    ].join('\n')
 
-      const msg = [
-        `*${tag}*`,
-        `*COTAÇÃO DE FRETE — SITE F1000*`,
-        '',
-        `*Modalidade:* ${LABEL_MODALIDADE[data.modalidade as Modalidade]}`,
-        `*Carga:* ${LABEL_TIPO[data.tipoCarga as TipoCarga]}`,
-        `*Origem:* ${data.origem}`,
-        `*Destino:* ${data.destino}`,
-        `*Peso:* ${data.pesoFaixa}`,
-        `*Valor NF:* ${data.valorNF}`,
-        `*Frequência:* ${LABEL_FREQUENCIA[data.frequencia as Frequencia]}`,
-        '',
-        `*Nome:* ${data.nome}`,
-        `*WhatsApp:* ${data.whatsapp}`,
-        `*Empresa:* ${data.empresa}`,
-        '',
-        `_Lead via quiz de cotação do site_`,
-      ].join('\n')
-
-      setTimeout(() => window.open(`https://wa.me/5531973495550?text=${encodeURIComponent(msg)}`, '_blank'), 1200)
-    }
+    setEnviado(true)
+    setTimeout(() => window.open(`https://wa.me/5531973495550?text=${encodeURIComponent(msg)}`, '_blank'), 1000)
   }
 
   if (!open) return null
@@ -247,7 +205,7 @@ export function QuizModal({ open, onClose }: QuizModalProps) {
           </button>
 
           {/* Progress bar */}
-          {!resultado && (
+          {!enviado && (
             <div style={{ height: '3px', backgroundColor: '#D4D7DD' }}>
               <motion.div
                 style={{ height: '100%', backgroundColor: '#053E83' }}
@@ -260,36 +218,15 @@ export function QuizModal({ open, onClose }: QuizModalProps) {
 
           <div style={{ padding: 'clamp(2rem,5vw,3.5rem)' }}>
 
-            {/* ── RESULTADO VERMELHO ── */}
-            {resultado === 'vermelho' && (
+            {/* ── CONFIRMAÇÃO DE ENVIO ── */}
+            {enviado && (
               <div style={{ textAlign: 'center', padding: '32px 0' }}>
-                <Ban size={48} strokeWidth={1.25} style={{ color: '#053E83', margin: '0 auto 24px' }} />
+                <CheckCircle2 size={48} strokeWidth={1.25} style={{ color: '#053E83', margin: '0 auto 24px' }} />
                 <h3 style={{ fontFamily: 'Inter, sans-serif', fontSize: '1.875rem', fontWeight: 700, color: '#000', marginBottom: '16px' }}>
-                  Esse perfil não é o nosso.
-                </h3>
-                <p style={{ fontFamily: 'Inter', fontSize: '1rem', color: '#6B7280', lineHeight: 1.65, maxWidth: '500px', margin: '0 auto 32px' }}>
-                  A F1000 opera exclusivamente cargas industriais a partir de 100 kg. Não atendemos mudanças residenciais, motofretes ou pequenos volumes.
-                </p>
-                <button onClick={onClose} style={{ backgroundColor: '#000', color: '#fff', fontFamily: 'Inter', fontWeight: 700, fontSize: '13px', letterSpacing: '0.12em', textTransform: 'uppercase', padding: '14px 32px', borderRadius: '2px', border: 'none', cursor: 'pointer' }}>
-                  Entendi
-                </button>
-              </div>
-            )}
-
-            {/* ── RESULTADO VERDE / AMARELO ── */}
-            {(resultado === 'verde' || resultado === 'amarelo') && (
-              <div style={{ textAlign: 'center', padding: '32px 0' }}>
-                {resultado === 'verde'
-                  ? <CheckCircle2 size={48} strokeWidth={1.25} style={{ color: '#053E83', margin: '0 auto 24px' }} />
-                  : <AlertTriangle size={48} strokeWidth={1.25} style={{ color: '#053E83', margin: '0 auto 24px' }} />
-                }
-                <h3 style={{ fontFamily: 'Inter, sans-serif', fontSize: '1.875rem', fontWeight: 700, color: '#000', marginBottom: '16px' }}>
-                  {resultado === 'verde' ? 'Cotação enviada.' : 'Enviado com observação.'}
+                  Cotação enviada.
                 </h3>
                 <p style={{ fontFamily: 'Inter', fontSize: '1rem', color: '#6B7280', lineHeight: 1.65, maxWidth: '500px', margin: '0 auto 8px' }}>
-                  {resultado === 'verde'
-                    ? 'Nosso comercial responde em até 15 minutos no seu WhatsApp.'
-                    : 'Sua carga exige confirmação prévia. Nosso comercial entra em contato antes da cotação.'}
+                  Nosso comercial responde em até 15 minutos no seu WhatsApp.
                 </p>
                 <p style={{ fontFamily: 'Inter', fontSize: '0.875rem', color: 'rgba(107,114,128,0.7)' }}>
                   Abrindo o WhatsApp em uma nova aba…
@@ -298,9 +235,9 @@ export function QuizModal({ open, onClose }: QuizModalProps) {
             )}
 
             {/* ── QUIZ STEPS ── */}
-            {!resultado && (
+            {!enviado && (
               <>
-                <p style={{ fontFamily: 'Inter', fontSize: '12px', fontWeight: 500, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#053E83', marginBottom: '12px' }}>
+                <p style={{ fontFamily: 'JetBrains Mono, ui-monospace, monospace', fontSize: '11px', fontWeight: 500, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#053E83', marginBottom: '12px' }}>
                   Passo {step + 1} de {TOTAL_STEPS}
                 </p>
 
@@ -309,10 +246,10 @@ export function QuizModal({ open, onClose }: QuizModalProps) {
                   <StepWrapper title="Qual modalidade você precisa?" sub="Definimos a melhor abordagem com base no formato do frete.">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       {([
-                        ['fracionado', 'Frete Fracionado', 'Carga consolidada, a partir de 100 kg'] as const,
-                        ['dedicado', 'Frete Dedicado', 'Veículo exclusivo, carga fechada'] as const,
-                        ['especial', 'Carga Especial', 'Aço, bobinas, equipamentos pesados'] as const,
-                        ['urgente', 'Frete Urgente', 'Coleta imediata, prioridade absoluta'] as const,
+                        ['fracionado', 'Frete Fracionado',  'Carga consolidada, a partir de 100 kg'] as const,
+                        ['dedicado',   'Frete Dedicado',    'Veículo exclusivo, carga fechada'] as const,
+                        ['especial',   'Carga Especial',    'Aço, bobinas, equipamentos pesados'] as const,
+                        ['urgente',    'Frete Urgente',     'Coleta imediata, prioridade absoluta'] as const,
                       ]).map(([val, title, desc]) => (
                         <OptionCard key={val} selected={data.modalidade === val} onClick={() => set('modalidade', val)} title={title} desc={desc} />
                       ))}
@@ -322,19 +259,15 @@ export function QuizModal({ open, onClose }: QuizModalProps) {
 
                 {/* Step 1 — Tipo de carga */}
                 {step === 1 && (
-                  <StepWrapper title="Qual o tipo de carga?" sub="Algumas cargas exigem operação especializada.">
+                  <StepWrapper title="Qual o tipo de carga?" sub="Selecione a categoria mais próxima da sua operação.">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       {([
-                        ['aco', 'Aço, bobinas, chapas'] as const,
+                        ['aco',          'Aço, bobinas, chapas'] as const,
                         ['equipamentos', 'Equipamentos industriais'] as const,
-                        ['energia', 'Painéis solares / energia'] as const,
-                        ['oleo-gas', 'Óleo & gás'] as const,
-                        ['mineracao', 'Mineração'] as const,
-                        ['gerador', 'Gerador de energia'] as const,
-                        ['outro-industrial', 'Outro tipo industrial'] as const,
-                        ['mudanca', 'Mudança residencial'] as const,
-                        ['motofrete', 'Motofrete / entregas'] as const,
-                        ['pequeno-volume', 'Pequeno volume / encomenda'] as const,
+                        ['energia',      'Energia (geradores, transformadores, solar)'] as const,
+                        ['oleo-gas',     'Óleo & gás'] as const,
+                        ['mineracao',    'Mineração'] as const,
+                        ['outros',       'Outros — descrever no contato'] as const,
                       ]).map(([val, title]) => (
                         <OptionCompact key={val} selected={data.tipoCarga === val} onClick={() => set('tipoCarga', val)} title={title} />
                       ))}
@@ -354,14 +287,12 @@ export function QuizModal({ open, onClose }: QuizModalProps) {
 
                 {/* Step 3 — Peso */}
                 {step === 3 && (
-                  <StepWrapper title="Qual o peso aproximado da carga?" sub="Operamos exclusivamente a partir de 100 kg.">
+                  <StepWrapper title="Qual o peso aproximado da carga?" sub="Informe a faixa de peso para dimensionarmos a operação.">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       {[
                         ['ate-100kg', 'Até 100 kg'],
-                        ['100-500kg', '100 a 500 kg'],
-                        ['500kg-2t', '500 kg a 2 toneladas'],
-                        ['2-10t', '2 a 10 toneladas'],
-                        ['10-25t', '10 a 25 toneladas'],
+                        ['100kg-1t',  'De 100 kg a 1 tonelada'],
+                        ['1-25t',     'De 1 a 25 toneladas'],
                         ['acima-25t', 'Acima de 25 toneladas'],
                       ].map(([val, title]) => (
                         <OptionCompact key={val} selected={data.pesoFaixa === val} onClick={() => set('pesoFaixa', val)} title={title} />
@@ -370,47 +301,13 @@ export function QuizModal({ open, onClose }: QuizModalProps) {
                   </StepWrapper>
                 )}
 
-                {/* Step 4 — Valor NF + Frequência */}
+                {/* Step 4 — Dados de contato */}
                 {step === 4 && (
-                  <StepWrapper title="Valor da nota e frequência" sub="Ajuda a dimensionar seguro e tipo de operação.">
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-                      <div>
-                        <p style={{ fontFamily: 'Inter', fontSize: '12px', fontWeight: 500, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.6)', marginBottom: '12px' }}>Valor aproximado da NF</p>
-                        <div className="grid grid-cols-2 gap-3">
-                          {[
-                            ['ate-50k', 'Até R$ 50 mil'],
-                            ['50k-200k', 'R$ 50 a 200 mil'],
-                            ['200k-500k', 'R$ 200 a 500 mil'],
-                            ['acima-500k', 'Acima de R$ 500 mil'],
-                          ].map(([val, title]) => (
-                            <OptionCompact key={val} selected={data.valorNF === val} onClick={() => set('valorNF', val)} title={title} />
-                          ))}
-                        </div>
-                      </div>
-                      <div>
-                        <p style={{ fontFamily: 'Inter', fontSize: '12px', fontWeight: 500, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.6)', marginBottom: '12px' }}>Frequência</p>
-                        <div className="grid grid-cols-2 gap-3">
-                          {([
-                            ['avulso', 'Frete avulso'] as const,
-                            ['mensal', 'Mensal'] as const,
-                            ['semanal', 'Semanal'] as const,
-                            ['recorrente', 'Recorrente / contrato'] as const,
-                          ]).map(([val, title]) => (
-                            <OptionCompact key={val} selected={data.frequencia === val} onClick={() => set('frequencia', val)} title={title} />
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  </StepWrapper>
-                )}
-
-                {/* Step 5 — Dados de contato */}
-                {step === 5 && (
-                  <StepWrapper title="Para te retornarmos em 15 minutos" sub="Seus dados ficam só com nosso comercial.">
+                  <StepWrapper title="Para te retornarmos em 15 minutos" sub="Seus dados ficam só com nosso comercial — sem spam.">
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                       <TextInput label="Nome completo *" value={data.nome} onChange={v => set('nome', v)} placeholder="Seu nome" />
                       <TextInput label="WhatsApp *" value={data.whatsapp} onChange={v => set('whatsapp', v)} placeholder="(31) 99999-9999" type="tel" />
-                      <TextInput label="Empresa *" value={data.empresa} onChange={v => set('empresa', v)} placeholder="Razão social ou nome fantasia" />
+                      <TextInput label="E-mail *" value={data.email} onChange={v => set('email', v)} placeholder="seu@email.com.br" type="email" />
                     </div>
                   </StepWrapper>
                 )}
@@ -429,7 +326,7 @@ export function QuizModal({ open, onClose }: QuizModalProps) {
                   {step < TOTAL_STEPS - 1 ? (
                     <button
                       type="button"
-                      onClick={avancar}
+                      onClick={() => setStep(s => s + 1)}
                       disabled={!podeAvancar()}
                       style={{ backgroundColor: podeAvancar() ? '#053E83' : '#D4D7DD', color: podeAvancar() ? '#fff' : '#9CA3AF', fontFamily: 'Inter', fontWeight: 700, fontSize: '13px', letterSpacing: '0.12em', textTransform: 'uppercase', padding: '14px 32px', borderRadius: '2px', border: 'none', cursor: podeAvancar() ? 'pointer' : 'not-allowed', display: 'flex', alignItems: 'center', gap: '8px', transition: 'background-color 200ms' }}
                     >

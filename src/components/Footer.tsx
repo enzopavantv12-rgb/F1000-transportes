@@ -15,16 +15,19 @@ export function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-12 pb-12">
 
           {/* Col 1 — Logo + endereço */}
-          <div className="flex flex-col gap-5">
+          <div className="flex flex-col gap-5 items-center sm:items-start text-center sm:text-left">
             <img
               src="/logo-f1000-branca.png"
               alt="F1000 Transportes"
+              width={160}
+              height={40}
+              loading="lazy"
               style={{ height: '40px', width: 'auto', objectFit: 'contain' }}
             />
 
-            <div className="flex flex-col gap-3">
+            <address className="not-italic flex flex-col gap-3">
               <div className="flex gap-3">
-                <MapPin size={14} strokeWidth={1.5} style={{ color: 'rgba(255,255,255,0.35)', marginTop: '2px', flexShrink: 0 }} />
+                <MapPin size={14} strokeWidth={1.5} style={{ color: 'rgba(255,255,255,0.35)', marginTop: '2px', flexShrink: 0 }} aria-hidden="true" />
                 <span style={{ fontFamily: 'Inter', fontSize: '0.875rem', color: 'rgba(255,255,255,0.5)', lineHeight: 1.6 }}>
                   {ADDRESS.street}<br />
                   {ADDRESS.district} · {ADDRESS.city}<br />
@@ -32,12 +35,12 @@ export function Footer() {
                 </span>
               </div>
               <div className="flex gap-3 items-center">
-                <Clock size={14} strokeWidth={1.5} style={{ color: 'rgba(255,255,255,0.35)', flexShrink: 0 }} />
+                <Clock size={14} strokeWidth={1.5} style={{ color: 'rgba(255,255,255,0.35)', flexShrink: 0 }} aria-hidden="true" />
                 <span style={{ fontFamily: 'Inter', fontSize: '0.875rem', color: 'rgba(255,255,255,0.5)' }}>
                   {HOURS}
                 </span>
               </div>
-            </div>
+            </address>
 
             <span style={{ fontFamily: 'Inter', fontSize: '0.8125rem', color: 'rgba(255,255,255,0.25)', letterSpacing: '0.04em' }}>
               CNPJ: XX.XXX.XXX/XXXX-XX
@@ -45,7 +48,7 @@ export function Footer() {
           </div>
 
           {/* Col 2 — Navegação */}
-          <div className="flex flex-col gap-4">
+          <nav aria-label="Navegação do rodapé" className="flex flex-col gap-4">
             <span
               style={{
                 fontFamily: 'Inter',
@@ -81,7 +84,7 @@ export function Footer() {
                 {item.label}
               </a>
             ))}
-          </div>
+          </nav>
 
           {/* Col 3 — Contato */}
           <div className="flex flex-col gap-4">

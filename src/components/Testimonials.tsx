@@ -1,26 +1,25 @@
 import { motion } from 'framer-motion'
 import { Eyebrow } from './ui/Eyebrow'
-import { BackgroundGrid } from './ui/BackgroundGrid'
 import { FADE_UP, STAGGER } from '../lib/constants'
 
 const TESTIMONIALS = [
   {
-    text: '[Depoimento a ser coletado — gerente de logística de cliente do setor de energia]',
-    name: 'Nome Sobrenome',
-    role: 'Gerente de Logística',
-    company: 'Empresa do Setor de Energia',
+    text: 'Excelente serviço, equipe muito competente e educada. Minha experiência com a empresa foi extremamente satisfatória, recebi um atendimento eficaz, com segurança e agilidade garantida. Recomendo a todos a F1000 Transportes.',
+    name: 'Marcos Antonio',
+    role: '11 avaliações · há 10 meses',
+    company: '',
   },
   {
-    text: '[Depoimento a ser coletado — comprador de transporte de indústria metalúrgica]',
-    name: 'Nome Sobrenome',
-    role: 'Comprador de Transporte',
-    company: 'Indústria Metalúrgica',
+    text: 'Facilidade no atendimento e compromisso com a carga, e tem uma equipe sempre pronta pra fazer do melhor pra sua entrega.',
+    name: 'Dhyemeson Marinho',
+    role: '1 avaliação · há 10 meses',
+    company: '',
   },
   {
-    text: '[Depoimento a ser coletado — supervisor de expedição de cliente recorrente]',
-    name: 'Nome Sobrenome',
-    role: 'Supervisor de Expedição',
-    company: 'Cliente Recorrente',
+    text: 'Excelente serviço! A equipe da F1000 Transportes é extremamente profissional, com um atendimento ágil e personalizado. As soluções logísticas são eficientes e garantem total segurança no transporte de cargas. Recomendo a todos que buscam qualidade e confiabilidade.',
+    name: 'Alanda Lopes',
+    role: '5 avaliações · há 1 ano',
+    company: '',
   },
 ]
 
@@ -31,7 +30,6 @@ export function Testimonials() {
       className="section-padding relative"
       style={{ backgroundColor: 'var(--color-paper)' }}
     >
-      <BackgroundGrid variant="light" />
       <div className="container-main flex flex-col gap-14 relative z-10">
         <motion.div
           className="flex flex-col items-center text-center gap-4"
@@ -60,7 +58,7 @@ export function Testimonials() {
             <motion.div
               key={i}
               variants={FADE_UP}
-              className="flex flex-col gap-5 p-8"
+              className="flex flex-col gap-5 p-8 text-center md:text-left items-center md:items-start"
               style={{
                 backgroundColor: 'var(--color-pure-white)',
                 border: '1px solid var(--color-mist)',

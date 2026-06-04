@@ -1,6 +1,5 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import { BackgroundGrid } from './BackgroundGrid'
 
 interface SectionWithMockupProps {
   title: string | React.ReactNode
@@ -41,7 +40,6 @@ const SectionWithMockup: React.FC<SectionWithMockupProps> = ({
       className="relative py-24 md:py-36 overflow-hidden"
       style={{ backgroundColor: bg }}
     >
-      {light && <BackgroundGrid variant="light" />}
       <div className="container max-w-[1220px] w-full px-6 md:px-10 relative z-10 mx-auto">
         <motion.div
           className={`grid grid-cols-1 gap-16 md:gap-8 w-full items-center ${layoutClasses}`}
@@ -52,7 +50,7 @@ const SectionWithMockup: React.FC<SectionWithMockupProps> = ({
         >
           {/* Texto */}
           <motion.div
-            className={`flex flex-col items-start gap-5 mt-10 md:mt-0 max-w-[546px] mx-auto md:mx-0 ${textOrderClass}`}
+            className={`flex flex-col items-center md:items-start text-center md:text-left gap-5 mt-10 md:mt-0 max-w-[546px] mx-auto md:mx-0 ${textOrderClass}`}
             variants={itemVariants}
           >
             <h2

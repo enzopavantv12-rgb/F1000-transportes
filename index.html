@@ -3,51 +3,67 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="format-detection" content="telephone=no" />
 
-    <!-- Preconnect fontes -->
+    <!-- Preconnect — fontes (não bloqueante) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
 
-    <!-- SEO -->
-    <title>F1000 Transportes · Frete Fracionado e Dedicado para Indústria | Cotação em 15 min</title>
-    <meta name="description" content="Transportadora especializada em cargas industriais — aço, equipamentos, energia, mineração. Cobertura nacional desde 2013. Cotação em 15 minutos." />
-    <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://f1000transportes.com" />
+    <!-- Fontes não bloqueantes — preload + onload pattern -->
+    <link
+      rel="preload" as="style"
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,900;1,14..32,400;1,14..32,700&family=JetBrains+Mono:wght@400;500&display=swap"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,900;1,14..32,400;1,14..32,700&family=JetBrains+Mono:wght@400;500&display=swap" />
+    </noscript>
 
-    <!-- Open Graph -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://f1000transportes.com" />
-    <meta property="og:title" content="F1000 Transportes · Frete Fracionado e Dedicado para Indústria" />
-    <meta property="og:description" content="Transportadora especializada em cargas industriais — aço, equipamentos, energia, mineração. Cobertura nacional desde 2013. Cotação em 15 minutos." />
-    <meta property="og:image" content="https://f1000transportes.com/og-image.jpg" />
-    <meta property="og:locale" content="pt_BR" />
+    <!-- SEO base — sobrescrito por react-helmet-async nas rotas -->
+    <title>F1000 Transportes — Transporte industrial para cargas críticas</title>
+    <meta name="description" content="Transportadora B2B com 13 anos de operação. Frete fracionado pesado, dedicado e cargas industriais (aço, energia, óleo & gás) com cobertura nacional. Cotação em 15 minutos." />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://f1000transportes.com/" />
+
+    <!-- Open Graph base -->
     <meta property="og:site_name" content="F1000 Transportes" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://f1000transportes.com/" />
+    <meta property="og:title" content="F1000 Transportes — Transporte industrial para cargas críticas" />
+    <meta property="og:description" content="Transportadora B2B com 13 anos de operação. Cobertura nacional. Cotação em 15 minutos." />
+    <meta property="og:image" content="https://f1000transportes.com/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="F1000 Transportes · Frete Industrial" />
-    <meta name="twitter:description" content="Transportadora B2B especializada. Cobertura nacional, cotação em 15 min." />
+    <meta name="twitter:title" content="F1000 Transportes — Transporte industrial para cargas críticas" />
+    <meta name="twitter:description" content="Transportadora B2B com 13 anos de operação. Cobertura nacional." />
     <meta name="twitter:image" content="https://f1000transportes.com/og-image.jpg" />
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="shortcut icon" href="/favicon.png" />
-    <link rel="apple-touch-icon" href="/favicon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png" />
 
-    <!-- Preload LCP — primeira imagem do carrossel -->
-    <link rel="preload" as="image" href="/imagens-hero/scania.atualizado.horizontal.webp" fetchpriority="high" type="image/webp" />
+    <!-- Preload LCP — primeira imagem do carrossel (home) -->
+    <link rel="preload" as="image" href="/imagens-hero/scania.deitada%20final.webp" fetchpriority="high" type="image/webp" />
 
-    <!-- JSON-LD Schema -->
+    <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": ["LocalBusiness", "MovingCompany"],
+      "@type": "MovingCompany",
       "name": "F1000 Transportes",
-      "description": "Transportadora especializada em cargas industriais — aço, equipamentos, energia, mineração e óleo & gás. Cobertura nacional.",
       "url": "https://f1000transportes.com",
-      "telephone": "+553197349550",
-      "email": "comercial@f1000transportes.com",
+      "logo": "https://f1000transportes.com/logo-f1000-branca.png",
+      "image": "https://f1000transportes.com/og-image.jpg",
+      "description": "Transportadora B2B especializada em frete fracionado pesado, dedicado e cargas industriais. 13 anos de operação com cobertura nacional.",
       "foundingDate": "2013",
+      "telephone": "+5531973495550",
+      "email": "comercial@f1000transportes.com",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "Av. Engenheiro Darcy Nogueira do Pinho, 2973",
@@ -56,15 +72,20 @@
         "postalCode": "32675-585",
         "addressCountry": "BR"
       },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": "-19.9669",
-        "longitude": "-44.1984"
+      "areaServed": {
+        "@type": "Country",
+        "name": "Brasil"
       },
+      "serviceType": [
+        "Frete fracionado pesado",
+        "Frete dedicado",
+        "Transporte de cargas industriais",
+        "Logística para aço, mineração, energia, óleo e gás"
+      ],
       "openingHoursSpecification": [
         {
           "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday"],
+          "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday"],
           "opens": "08:00",
           "closes": "18:00"
         },
@@ -75,9 +96,15 @@
           "closes": "17:00"
         }
       ],
-      "areaServed": {
-        "@type": "Country",
-        "name": "Brazil"
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Modalidades de transporte",
+        "itemListElement": [
+          {"@type":"Offer","itemOffered":{"@type":"Service","name":"Frete fracionado pesado"}},
+          {"@type":"Offer","itemOffered":{"@type":"Service","name":"Frete dedicado"}},
+          {"@type":"Offer","itemOffered":{"@type":"Service","name":"Transporte de aço e bobinas"}},
+          {"@type":"Offer","itemOffered":{"@type":"Service","name":"Frete urgente — coleta imediata"}}
+        ]
       },
       "sameAs": [
         "https://instagram.com/f1000transportesltda",

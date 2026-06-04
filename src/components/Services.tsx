@@ -267,7 +267,7 @@ export function Services() {
             <Card className="h-full">
               <CardContent className="grid sm:grid-cols-2 pt-6 h-full gap-6">
                 {/* Texto */}
-                <div className="flex flex-col justify-between gap-8">
+                <div className="flex flex-col justify-between gap-8 text-center sm:text-left items-center sm:items-start">
                   <div
                     className="relative flex aspect-square size-12 rounded-full items-center justify-center"
                     style={{ border: '1px solid rgba(255,255,255,0.1)' }}
