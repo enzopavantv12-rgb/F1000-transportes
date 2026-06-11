@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { Header } from './components/Header'
 import { Hero } from './components/Hero'
@@ -12,10 +13,15 @@ import { Testimonials } from './components/Testimonials'
 import { FAQ } from './components/FAQ'
 import { FinalCTA } from './components/FinalCTA'
 import { Footer } from './components/Footer'
+import { QuizModal } from './components/QuizModal'
+import { QuizContext } from './lib/QuizContext'
 
 export default function App() {
+  const [quizOpen, setQuizOpen] = useState(false)
+
   return (
-    <>
+    <QuizContext.Provider value={() => setQuizOpen(true)}>
+      <QuizModal open={quizOpen} onClose={() => setQuizOpen(false)} />
       <Helmet>
         <title>F1000 Transportes — Transporte industrial para cargas críticas</title>
         <meta name="description" content="Transportadora B2B com 13 anos de operação. Frete fracionado pesado, dedicado e cargas industriais com cobertura nacional. Cotação em 15 minutos." />
@@ -51,6 +57,6 @@ export default function App() {
       </main>
 
       <Footer />
-    </>
+    </QuizContext.Provider>
   )
 }

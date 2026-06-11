@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import SectionWithMockup from './ui/SectionWithMockup'
 import { InstitutionalDashboard } from './InstitutionalDashboard'
-import { WA_COTACAO } from '../lib/constants'
+import { useQuiz } from '../lib/QuizContext'
 
 const SECONDARY_IMG =
   'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600&q=80&auto=format&fit=crop'
@@ -14,7 +14,9 @@ const title = (
   </>
 )
 
-const description = (
+function Description() {
+  const openQuiz = useQuiz()
+  return (
   <div className="flex flex-col gap-4">
     <p>
       Fundada em 2013 com o propósito de oferecer logística confiável e sob medida para o mercado
@@ -36,10 +38,8 @@ const description = (
       </div>
 
       <div className="flex flex-col sm:flex-row gap-3 mt-2 items-center sm:items-start">
-        <motion.a
-          href={WA_COTACAO}
-          target="_blank"
-          rel="noopener noreferrer"
+        <motion.button
+          onClick={openQuiz}
           whileHover={{ y: -2 }}
           transition={{ duration: 0.2 }}
           style={{
@@ -55,12 +55,13 @@ const description = (
             textTransform: 'uppercase',
             padding: '14px 28px',
             borderRadius: '2px',
-            textDecoration: 'none',
+            border: 'none',
+            cursor: 'pointer',
             whiteSpace: 'nowrap',
           }}
         >
           Solicitar cotação
-        </motion.a>
+        </motion.button>
         <Link
           to="/motorista-parceiro"
           style={{
@@ -86,14 +87,15 @@ const description = (
       </div>
     </div>
   </div>
-)
+  )
+}
 
 export function Institutional() {
   return (
     <section id="sobre">
       <SectionWithMockup
         title={title}
-        description={description}
+        description={<Description />}
         primaryContent={<InstitutionalDashboard />}
         secondaryImageSrc={SECONDARY_IMG}
         light

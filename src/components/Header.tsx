@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
-import { WA_COTACAO } from '../lib/constants'
+import { useQuiz } from '../lib/QuizContext'
 
 const NAV_ITEMS = [
   { label: 'Serviços', href: '#servicos' },
@@ -14,6 +14,7 @@ const NAV_ITEMS = [
 export function Header() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const openQuiz = useQuiz()
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 40)
@@ -105,10 +106,8 @@ export function Header() {
           </nav>
 
           <div className="hidden md:block">
-            <a
-              href={WA_COTACAO}
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              onClick={openQuiz}
               style={{
                 backgroundColor: 'var(--color-deep-blue)',
                 color: '#FFFFFF',
@@ -119,7 +118,8 @@ export function Header() {
                 textTransform: 'uppercase',
                 padding: '12px 22px',
                 borderRadius: '2px',
-                textDecoration: 'none',
+                border: 'none',
+                cursor: 'pointer',
                 display: 'inline-flex',
                 alignItems: 'center',
                 transition: 'background-color 200ms ease',
@@ -128,7 +128,7 @@ export function Header() {
               onMouseLeave={e => ((e.currentTarget as HTMLElement).style.backgroundColor = 'var(--color-deep-blue)')}
             >
               Cotação de Frete
-            </a>
+            </button>
           </div>
 
           <button
@@ -210,10 +210,8 @@ export function Header() {
                 paddingRight: 'clamp(1.25rem, 5vw, 3rem)',
               }}
             >
-              <a
-                href={WA_COTACAO}
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                onClick={() => { setMenuOpen(false); openQuiz() }}
                 style={{
                   display: 'block',
                   width: '100%',
@@ -227,11 +225,12 @@ export function Header() {
                   textTransform: 'uppercase',
                   padding: '18px',
                   borderRadius: '2px',
-                  textDecoration: 'none',
+                  border: 'none',
+                  cursor: 'pointer',
                 }}
               >
                 Cotação de Frete
-              </a>
+              </button>
             </div>
           </motion.div>
         )}

@@ -1,13 +1,12 @@
-import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { HeroCarousel } from './HeroCarousel'
-import { QuizModal } from './QuizModal'
+import { useQuiz } from '../lib/QuizContext'
 
 const HEADLINE = ['MOVA', 'O QUE', 'NÃO PODE', 'PARAR.']
 
 export function Hero() {
-  const [quizOpen, setQuizOpen] = useState(false)
+  const openQuiz = useQuiz()
 
   return (
     <>
@@ -83,7 +82,7 @@ export function Hero() {
                   letterSpacing: '0.22em',
                   textTransform: 'uppercase',
                   color: 'rgba(255,255,255,0.6)',
-                  marginBottom: 'clamp(24px,4vw,32px)',
+                  marginBottom: 'clamp(16px,2.5vw,28px)',
                 }}
               >
                 F1000 Transportes
@@ -94,7 +93,7 @@ export function Hero() {
                 style={{
                   fontFamily: 'Inter, sans-serif',
                   fontWeight: 900,
-                  fontSize: 'clamp(2.75rem,9vw,7.5rem)',
+                  fontSize: 'clamp(2.75rem,7.5vw,7.5rem)',
                   lineHeight: 0.92,
                   letterSpacing: '-0.035em',
                   color: '#fff',
@@ -127,8 +126,8 @@ export function Hero() {
                   lineHeight: 1.55,
                   color: 'rgba(255,255,255,0.7)',
                   maxWidth: '500px',
-                  marginTop: 'clamp(28px,4vw,40px)',
-                  marginBottom: 'clamp(32px,5vw,48px)',
+                  marginTop: 'clamp(20px,3vw,36px)',
+                  marginBottom: 'clamp(24px,3.5vw,44px)',
                 }}
               >
                 Transporte industrial para cargas críticas. Cobertura nacional,
@@ -143,7 +142,7 @@ export function Hero() {
                 className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-center sm:items-start"
               >
                 <button
-                  onClick={() => setQuizOpen(true)}
+                  onClick={openQuiz}
                   style={{
                     display: 'inline-flex',
                     alignItems: 'center',
@@ -205,7 +204,7 @@ export function Hero() {
                   fontSize: 'clamp(11px,1.2vw,13px)',
                   color: 'rgba(255,255,255,0.4)',
                   letterSpacing: '0.02em',
-                  marginTop: 'clamp(20px,3vw,28px)',
+                  marginTop: 'clamp(14px,2vw,22px)',
                 }}
               >
                 Resposta em 15 minutos · Atendimento Seg–Sex, 08h às 18h
@@ -243,7 +242,6 @@ export function Hero() {
 
       </section>
 
-      <QuizModal open={quizOpen} onClose={() => setQuizOpen(false)} />
     </>
   )
 }
