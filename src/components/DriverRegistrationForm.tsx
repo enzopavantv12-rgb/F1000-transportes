@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { CheckCircle2 } from 'lucide-react'
+import { gtmPush } from '../lib/gtm'
 
 interface FormData {
   nome: string
@@ -33,6 +34,14 @@ const INPUT = {
   outline: 'none',
   boxSizing: 'border-box' as const,
   appearance: 'none' as const,
+} satisfies React.CSSProperties
+
+// color-scheme: dark faz o browser renderizar o popup nativo em modo escuro
+// no Windows (Chrome/Edge), evitando texto branco sobre fundo branco.
+const SELECT = {
+  ...INPUT,
+  colorScheme: 'dark',
+  cursor: 'pointer',
 } satisfies React.CSSProperties
 
 const LABEL = {
@@ -73,6 +82,7 @@ export function DriverRegistrationForm() {
       `_Cadastro via /motorista-parceiro_`,
     ].join('\n')
 
+    gtmPush({ event: 'form_submit', form_id: 'cadastro_motorista_parceiro' })
     window.open(`https://wa.me/5531973495550?text=${encodeURIComponent(msg)}`, '_blank')
     setSubmitted(true)
   }
@@ -119,7 +129,7 @@ export function DriverRegistrationForm() {
       <div className="grid md:grid-cols-3 gap-6">
         <div>
           <label style={LABEL}>CNH categoria *</label>
-          <select required value={data.cnhCategoria} onChange={up('cnhCategoria')} style={INPUT}>
+          <select required value={data.cnhCategoria} onChange={up('cnhCategoria')} style={SELECT}>
             <option value="">Selecione</option>
             <option>C</option>
             <option>D</option>
@@ -128,7 +138,7 @@ export function DriverRegistrationForm() {
         </div>
         <div>
           <label style={LABEL}>Tipo de veículo *</label>
-          <select required value={data.veiculoTipo} onChange={up('veiculoTipo')} style={INPUT}>
+          <select required value={data.veiculoTipo} onChange={up('veiculoTipo')} style={SELECT}>
             <option value="">Selecione</option>
             <option>Toco</option>
             <option>Truck</option>
@@ -147,7 +157,7 @@ export function DriverRegistrationForm() {
       <div className="grid md:grid-cols-2 gap-6">
         <div>
           <label style={LABEL}>Veículo próprio ou agregado? *</label>
-          <select required value={data.veiculoProprio} onChange={up('veiculoProprio')} style={INPUT}>
+          <select required value={data.veiculoProprio} onChange={up('veiculoProprio')} style={SELECT}>
             <option value="">Selecione</option>
             <option>Próprio</option>
             <option>Agregado de outra empresa</option>
@@ -156,7 +166,7 @@ export function DriverRegistrationForm() {
         </div>
         <div>
           <label style={LABEL}>RNTRC ativo?</label>
-          <select value={data.rntrc} onChange={up('rntrc')} style={INPUT}>
+          <select value={data.rntrc} onChange={up('rntrc')} style={SELECT}>
             <option value="">Selecione</option>
             <option>Sim, ativo</option>
             <option>Em renovação</option>
@@ -167,7 +177,7 @@ export function DriverRegistrationForm() {
 
       <div>
         <label style={LABEL}>Tempo de experiência *</label>
-        <select required value={data.experiencia} onChange={up('experiencia')} style={INPUT}>
+        <select required value={data.experiencia} onChange={up('experiencia')} style={SELECT}>
           <option value="">Selecione</option>
           <option>Menos de 2 anos</option>
           <option>2 a 5 anos</option>
@@ -178,7 +188,7 @@ export function DriverRegistrationForm() {
 
       <div>
         <label style={LABEL}>Disponibilidade *</label>
-        <select required value={data.disponibilidade} onChange={up('disponibilidade')} style={INPUT}>
+        <select required value={data.disponibilidade} onChange={up('disponibilidade')} style={SELECT}>
           <option value="">Selecione</option>
           <option>Imediata, rodando agora</option>
           <option>Esta semana</option>
