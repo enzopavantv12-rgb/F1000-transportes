@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { CheckCircle2 } from 'lucide-react'
-import { gtmPush } from '../lib/gtm'
 
 interface FormData {
   nome: string
@@ -82,7 +81,15 @@ export function DriverRegistrationForm() {
       `_Cadastro via /motorista-parceiro_`,
     ].join('\n')
 
-    gtmPush({ event: 'form_submit', form_id: 'cadastro_motorista_parceiro' })
+    window.dataLayer = window.dataLayer || []
+    if (!window.__f1000MotoristaEnviado) {
+      window.__f1000MotoristaEnviado = true
+      window.dataLayer.push({
+        event: 'form_lead_motorista_parceiro',
+        form_id: 'f1000_motorista_parceiro',
+      })
+    }
+
     window.open(`https://wa.me/5531973495550?text=${encodeURIComponent(msg)}`, '_blank')
     setSubmitted(true)
   }

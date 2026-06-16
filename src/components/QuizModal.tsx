@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, ArrowRight, ArrowLeft, CheckCircle2 } from 'lucide-react'
-import { gtmPush } from '../lib/gtm'
 
 interface QuizModalProps {
   open: boolean
@@ -152,7 +151,14 @@ export function QuizModal({ open, onClose }: QuizModalProps) {
   }
 
   const finalizar = () => {
-    gtmPush({ event: 'form_submit', form_id: 'quiz_cotacao_frete' })
+    window.dataLayer = window.dataLayer || []
+    if (!window.__f1000CotacaoEnviado) {
+      window.__f1000CotacaoEnviado = true
+      window.dataLayer.push({
+        event: 'form_lead_cotacao_frete',
+        form_id: 'f1000_cotacao_frete',
+      })
+    }
 
     const msg = [
       '🔥 *NOVO LEAD — F1000 Transportes*',

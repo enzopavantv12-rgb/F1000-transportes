@@ -1,11 +1,9 @@
-type GtmPayload = {
-  event: string
-  form_id: string
-  [key: string]: unknown
+declare global {
+  interface Window {
+    dataLayer: Record<string, unknown>[]
+    __f1000CotacaoEnviado?: boolean
+    __f1000MotoristaEnviado?: boolean
+  }
 }
 
-export function gtmPush(payload: GtmPayload) {
-  const w = window as Window & { dataLayer?: GtmPayload[] }
-  w.dataLayer = w.dataLayer ?? []
-  w.dataLayer.push(payload)
-}
+export {}

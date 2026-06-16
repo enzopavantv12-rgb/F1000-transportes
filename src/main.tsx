@@ -5,6 +5,7 @@ import { HelmetProvider } from 'react-helmet-async'
 import App from './App'
 import MotoristaParceiro from './pages/MotoristaParceiro'
 import './styles/globals.css'
+import './lib/gtm'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
