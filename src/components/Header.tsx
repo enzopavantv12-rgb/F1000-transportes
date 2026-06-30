@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
 import { useQuiz } from '../lib/QuizContext'
 
@@ -7,7 +8,7 @@ const NAV_ITEMS = [
   { label: 'Serviços', href: '#servicos' },
   { label: 'Sobre', href: '#sobre' },
   { label: 'Setores', href: '#setores' },
-  { label: 'Motorista parceiro', href: '#motorista' },
+  { label: 'Motorista parceiro', href: '/motorista-parceiro', isRoute: true },
   { label: 'Contato', href: '#cta-final' },
 ]
 
@@ -84,25 +85,28 @@ export function Header() {
           </a>
 
           <nav className="hidden md:flex items-center gap-8" aria-label="Navegação principal">
-            {NAV_ITEMS.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                style={{
-                  fontFamily: 'Inter',
-                  fontWeight: 500,
-                  fontSize: '0.875rem',
-                  color: 'rgba(255,255,255,0.65)',
-                  textDecoration: 'none',
-                  transition: 'color 150ms ease',
-                  letterSpacing: '0.01em',
-                }}
-                onMouseEnter={e => ((e.currentTarget as HTMLElement).style.color = '#FFFFFF')}
-                onMouseLeave={e => ((e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.65)')}
-              >
-                {item.label}
-              </a>
-            ))}
+            {NAV_ITEMS.map((item) => {
+              const navStyle = {
+                fontFamily: 'Inter',
+                fontWeight: 500,
+                fontSize: '0.875rem',
+                color: 'rgba(255,255,255,0.65)',
+                textDecoration: 'none',
+                transition: 'color 150ms ease',
+                letterSpacing: '0.01em',
+              }
+              const hoverOn  = (e: React.MouseEvent<HTMLElement>) => (e.currentTarget.style.color = '#FFFFFF')
+              const hoverOff = (e: React.MouseEvent<HTMLElement>) => (e.currentTarget.style.color = 'rgba(255,255,255,0.65)')
+              return item.isRoute ? (
+                <Link key={item.label} to={item.href} style={navStyle} onMouseEnter={hoverOn} onMouseLeave={hoverOff}>
+                  {item.label}
+                </Link>
+              ) : (
+                <a key={item.label} href={item.href} style={navStyle} onMouseEnter={hoverOn} onMouseLeave={hoverOff}>
+                  {item.label}
+                </a>
+              )
+            })}
           </nav>
 
           <div className="hidden md:block">
@@ -180,26 +184,38 @@ export function Header() {
               }}
               aria-label="Menu mobile"
             >
-              {NAV_ITEMS.map((item, i) => (
-                <motion.a
-                  key={item.label}
-                  href={item.href}
-                  onClick={() => setMenuOpen(false)}
-                  style={{
-                    fontFamily: 'Inter',
-                    fontWeight: 900,
-                    fontSize: 'clamp(1.75rem, 6vw, 3rem)',
-                    color: '#FFFFFF',
-                    textDecoration: 'none',
-                    letterSpacing: '-0.025em',
-                  }}
-                  initial={{ opacity: 0, x: -16 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.06, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                >
-                  {item.label}
-                </motion.a>
-              ))}
+              {NAV_ITEMS.map((item, i) => {
+                const mobileStyle = {
+                  fontFamily: 'Inter',
+                  fontWeight: 900,
+                  fontSize: 'clamp(1.75rem, 6vw, 3rem)' as const,
+                  color: '#FFFFFF',
+                  textDecoration: 'none',
+                  letterSpacing: '-0.025em',
+                }
+                const motionProps = {
+                  initial: { opacity: 0, x: -16 },
+                  animate: { opacity: 1, x: 0 },
+                  transition: { delay: i * 0.06, duration: 0.4, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
+                }
+                return item.isRoute ? (
+                  <motion.div key={item.label} {...motionProps}>
+                    <Link to={item.href} onClick={() => setMenuOpen(false)} style={mobileStyle}>
+                      {item.label}
+                    </Link>
+                  </motion.div>
+                ) : (
+                  <motion.a
+                    key={item.label}
+                    href={item.href}
+                    onClick={() => setMenuOpen(false)}
+                    style={mobileStyle}
+                    {...motionProps}
+                  >
+                    {item.label}
+                  </motion.a>
+                )
+              })}
             </nav>
 
             <div

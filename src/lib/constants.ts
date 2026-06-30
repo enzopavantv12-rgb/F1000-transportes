@@ -6,8 +6,7 @@ export const WA_URGENTE = `${WA_BASE}?text=Ol%C3%A1%2C%20preciso%20de%20um%20fre
 
 export const EMAIL = 'comercial@f1000transportes.com'
 
-export const PHONE_PRIMARY = '(31) 97349-5550'
-export const PHONE_SECONDARY = '(31) 99156-9999'
+export const PHONE_PRIMARY = '(31) 3112-9887'
 
 export const ADDRESS = {
   street: 'Av. Engenheiro Darcy Nogueira do Pinho, 2973',

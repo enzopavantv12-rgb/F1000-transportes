@@ -1,6 +1,7 @@
 import { Instagram, Linkedin, MapPin, Clock, Phone, Mail } from 'lucide-react'
 import { BackgroundGrid } from './ui/BackgroundGrid'
-import { ADDRESS, EMAIL, HOURS, INSTAGRAM, LINKEDIN, PHONE_PRIMARY, PHONE_SECONDARY } from '../lib/constants'
+import { Link } from 'react-router-dom'
+import { ADDRESS, EMAIL, HOURS, INSTAGRAM, LINKEDIN, PHONE_PRIMARY } from '../lib/constants'
 
 export function Footer() {
   const year = new Date().getFullYear()
@@ -66,23 +67,41 @@ export function Footer() {
               { label: 'Sobre a F1000', href: '#sobre' },
               { label: 'Setores', href: '#setores' },
               { label: 'FAQ', href: '#faq' },
-              { label: 'Motorista parceiro', href: '#motorista' },
+              { label: 'Motorista parceiro', href: '/motorista-parceiro' },
             ].map(item => (
-              <a
-                key={item.label}
-                href={item.href}
-                style={{
-                  fontFamily: 'Inter',
-                  fontSize: '0.9375rem',
-                  color: 'rgba(255,255,255,0.55)',
-                  textDecoration: 'none',
-                  transition: 'color 150ms',
-                }}
-                onMouseEnter={e => ((e.currentTarget as HTMLElement).style.color = 'white')}
-                onMouseLeave={e => ((e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.55)')}
-              >
-                {item.label}
-              </a>
+              item.href === '/motorista-parceiro' ? (
+                <Link
+                  key={item.label}
+                  to={item.href}
+                  style={{
+                    fontFamily: 'Inter',
+                    fontSize: '0.9375rem',
+                    color: 'rgba(255,255,255,0.55)',
+                    textDecoration: 'none',
+                    transition: 'color 150ms',
+                  }}
+                  onMouseEnter={e => ((e.currentTarget as HTMLElement).style.color = 'white')}
+                  onMouseLeave={e => ((e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.55)')}
+                >
+                  {item.label}
+                </Link>
+              ) : (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  style={{
+                    fontFamily: 'Inter',
+                    fontSize: '0.9375rem',
+                    color: 'rgba(255,255,255,0.55)',
+                    textDecoration: 'none',
+                    transition: 'color 150ms',
+                  }}
+                  onMouseEnter={e => ((e.currentTarget as HTMLElement).style.color = 'white')}
+                  onMouseLeave={e => ((e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.55)')}
+                >
+                  {item.label}
+                </a>
+              )
             ))}
           </nav>
 
@@ -108,14 +127,6 @@ export function Footer() {
               >
                 <Phone size={14} strokeWidth={1.5} style={{ color: 'rgba(255,255,255,0.35)' }} />
                 <span style={{ fontFamily: 'Inter', fontSize: '0.9375rem', color: 'rgba(255,255,255,0.55)' }}>{PHONE_PRIMARY}</span>
-              </a>
-              <a
-                href={`tel:${PHONE_SECONDARY.replace(/\D/g, '')}`}
-                className="flex items-center gap-3"
-                style={{ textDecoration: 'none' }}
-              >
-                <Phone size={14} strokeWidth={1.5} style={{ color: 'rgba(255,255,255,0.35)' }} />
-                <span style={{ fontFamily: 'Inter', fontSize: '0.9375rem', color: 'rgba(255,255,255,0.55)' }}>{PHONE_SECONDARY}</span>
               </a>
               <a
                 href={`mailto:${EMAIL}`}
@@ -198,6 +209,19 @@ export function Footer() {
           <span style={{ fontFamily: 'Inter', fontSize: '0.8125rem', color: 'rgba(255,255,255,0.28)' }}>
             © {year} F1000 Transportes · Todos os direitos reservados
           </span>
+
+          {/* Desenvolvido por Wolfness */}
+          <div className="flex items-center gap-2">
+            <span style={{ fontFamily: 'Inter', fontSize: '0.75rem', color: 'rgba(255,255,255,0.22)', letterSpacing: '0.04em' }}>
+              Desenvolvido por
+            </span>
+            <img
+              src="/logos-clientes/wolfness-logo.png"
+              alt="Wolfness"
+              loading="lazy"
+              style={{ height: '20px', width: 'auto', objectFit: 'contain', opacity: 0.55 }}
+            />
+          </div>
           <div className="flex gap-4">
             {['Política de Privacidade', 'Termos de Uso', 'LGPD'].map(link => (
               <a
