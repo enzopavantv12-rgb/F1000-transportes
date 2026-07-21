@@ -15,6 +15,7 @@ interface QuizData {
   tipoCarga: TipoCarga | ''
   origem: string
   destino: string
+  tipoContratacao: string
   pesoFaixa: string
   nome: string
   whatsapp: string
@@ -23,7 +24,7 @@ interface QuizData {
 
 const INITIAL: QuizData = {
   modalidade: '', tipoCarga: '', origem: '', destino: '',
-  pesoFaixa: '', nome: '', whatsapp: '', email: '',
+  tipoContratacao: '', pesoFaixa: '', nome: '', whatsapp: '', email: '',
 }
 
 const TOTAL_STEPS = 5
@@ -144,7 +145,7 @@ export function QuizModal({ open, onClose }: QuizModalProps) {
       case 0: return data.modalidade !== ''
       case 1: return data.tipoCarga !== ''
       case 2: return data.origem.length > 2 && data.destino.length > 2
-      case 3: return data.pesoFaixa !== ''
+      case 3: return data.tipoContratacao !== '' && data.pesoFaixa !== ''
       case 4: return data.nome.length > 2 && data.whatsapp.length > 8 && data.email.includes('@')
       default: return false
     }
@@ -166,6 +167,7 @@ export function QuizModal({ open, onClose }: QuizModalProps) {
       '',
       `📋 *Modalidade:* ${LABEL_MODALIDADE[data.modalidade as Modalidade]}`,
       `📦 *Tipo de carga:* ${LABEL_TIPO[data.tipoCarga as TipoCarga]}`,
+      `👤 *Contratação:* ${data.tipoContratacao}`,
       `📍 *Origem:* ${data.origem}`,
       `📍 *Destino:* ${data.destino}`,
       `⚖️ *Peso aproximado:* ${data.pesoFaixa}`,
@@ -294,20 +296,59 @@ export function QuizModal({ open, onClose }: QuizModalProps) {
                   </StepWrapper>
                 )}
 
-                {/* Step 3 — Peso */}
+                {/* Step 3 — Tipo de contratação & Peso da carga */}
                 {step === 3 && (
-                  <StepWrapper title="Qual o peso aproximado da carga?" sub="Informe a faixa de peso para dimensionarmos a operação.">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      {[
-                        ['ate-100kg', 'Até 100 kg'],
-                        ['100kg-1t',  'De 100 kg a 1 tonelada'],
-                        ['1-25t',     'De 1 a 25 toneladas'],
-                        ['acima-25t', 'Acima de 25 toneladas'],
-                      ].map(([val, title]) => (
-                        <OptionCompact key={val} selected={data.pesoFaixa === val} onClick={() => set('pesoFaixa', val)} title={title} />
-                      ))}
+                  <div>
+                    {/* Pergunta A */}
+                    <div style={{ marginBottom: '28px' }}>
+                      <h3 style={{ fontFamily: 'Inter, sans-serif', fontSize: 'clamp(1.25rem, 2.5vw, 1.625rem)', fontWeight: 700, color: '#000', lineHeight: 1.2, marginBottom: '8px' }}>
+                        Você contrata como pessoa física ou empresa?
+                      </h3>
+                      <p style={{ fontFamily: 'Inter', fontSize: '0.9375rem', color: '#6B7280', marginBottom: '16px', lineHeight: 1.5 }}>
+                        Isso nos ajuda a direcionar o atendimento corretamente.
+                      </p>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        {['Empresa', 'Pessoa física'].map(val => (
+                          <OptionCompact
+                            key={val}
+                            selected={data.tipoContratacao === val}
+                            onClick={() => set('tipoContratacao', val)}
+                            title={val}
+                          />
+                        ))}
+                      </div>
                     </div>
-                  </StepWrapper>
+
+                    {/* Pergunta B */}
+                    <div style={{ borderTop: '1px solid #D4D7DD', paddingTop: '24px' }}>
+                      <h3 style={{ fontFamily: 'Inter, sans-serif', fontSize: 'clamp(1.25rem, 2.5vw, 1.625rem)', fontWeight: 700, color: '#000', lineHeight: 1.2, marginBottom: '8px' }}>
+                        Qual o peso aproximado da carga?
+                      </h3>
+                      <p style={{ fontFamily: 'Inter', fontSize: '0.9375rem', color: '#6B7280', marginBottom: '16px', lineHeight: 1.5 }}>
+                        Informe a faixa de peso para dimensionarmos a operação.
+                      </p>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        {[
+                          'De 300 kg a 1 tonelada',
+                          'De 1 a 5 toneladas',
+                          'De 5 a 25 toneladas',
+                          'Acima de 25 toneladas',
+                        ].map(val => (
+                          <OptionCompact
+                            key={val}
+                            selected={data.pesoFaixa === val}
+                            onClick={() => set('pesoFaixa', val)}
+                            title={val}
+                          />
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Nota de frete mínimo */}
+                    <p style={{ fontFamily: 'Inter', fontSize: '0.75rem', color: '#9CA3AF', marginTop: '20px', fontStyle: 'italic' }}>
+                      *Frete mínimo de R$ 1.000,00
+                    </p>
+                  </div>
                 )}
 
                 {/* Step 4 — Dados de contato */}
